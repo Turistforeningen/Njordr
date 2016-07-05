@@ -5,7 +5,7 @@ module.exports = {
   eslint: {configFile: '.eslintrc'},
   devtool: 'eval',
   entry: [
-    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'webpack-dev-server/client?http://0.0.0.0',
     'webpack/hot/only-dev-server',
     './src/index'
   ],

@@ -6,6 +6,7 @@ new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
   historyApiFallback: true,
+  watchOptions: {aggregateTimeout: 300, poll: true}
 }).listen(8080, '0.0.0.0', function (err, result) {
   if (err) {
     return console.log(err);
