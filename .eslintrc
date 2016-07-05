@@ -1,0 +1,17 @@
+{
+  "extends": "airbnb-base",
+  "plugins": ["react"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "strict": [2, "global"],
+    "no-param-reassign": [2, {"props": false}],
+    "object-curly-spacing": [0],
+    "no-unused-vars": [0]
+  }
+}
