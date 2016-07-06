@@ -15,6 +15,10 @@ build:
         code: npm run lint
 
     - script:
+        name: test
+        code: npm run test
+
+    - script:
         name: node security project
         code: |
           npm run nsp
