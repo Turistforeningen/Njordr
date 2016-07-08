@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Photos from '../components/Photos.jsx';
 
 const mapStateToProps = (state) => ({
+  album: state.albums[state.selectedAlbum],
   photos: (
     state.selectedAlbum &&
     state.albums[state.selectedAlbum] &&

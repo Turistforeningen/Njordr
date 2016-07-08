@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import Photo from './Photo.jsx';
 
-const Photos = ({photos}) => {
+const Photos = ({album, photos}) => {
   if (photos.length === 0) {
     return (<div>Empty album!</div>);
   }
