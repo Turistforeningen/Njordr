@@ -4,6 +4,8 @@ import {
   SHOW_ROOT,
   REQUEST_ALBUM,
   RECEIVE_ALBUM,
+  REQUEST_ALBUMS,
+  RECEIVE_ALBUMS,
 } from '../actions/index.js';
 
 function selectedAlbum(state = null, action) {
@@ -36,9 +38,24 @@ function albums(state = {}, action) {
   switch (action.type) {
     case REQUEST_ALBUM:
     case RECEIVE_ALBUM:
-      return Object.assign({}, state, {
-        [action.album]: album(state[action.album], action),
-      });
+      return Object.assign(
+        {},
+        state,
+        {[action.album]: album(state[action.album], action)}
+      );
+    case REQUEST_ALBUMS:
+      return Object.assign({}, state, {});
+    case RECEIVE_ALBUMS:
+      return Object.assign(
+        {},
+        state,
+        action.albums.reduce((previousValue, currentValue, currentIndex, array) => {
+          previousValue[currentValue.id] = Object.assign(
+            {}, state[currentValue.id], currentValue
+          );
+          return previousValue;
+        }, {})
+      );
     default:
       return state;
   }
