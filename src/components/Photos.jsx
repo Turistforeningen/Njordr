@@ -6,14 +6,14 @@ const Photos = ({album, photos}) => {
     return (<div>Empty album!</div>);
   }
   return (
-    <ul>
-      {photos.map(photo =>
-        <Photo
-          key={photo.id}
-          {...photo}
-        />
-      )}
-    </ul>
+    <div>
+      {album && album.name ? album.name : 'Album uten navn'}
+      <ul>
+        {photos.map(photo =>
+          <Photo key={photo.id} {...photo} />
+        )}
+      </ul>
+    </div>
   );
 };
 
