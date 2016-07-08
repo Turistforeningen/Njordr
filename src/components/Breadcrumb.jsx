@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 
 import {selectAlbum} from '../actions/index.js';
 
-const Breadcrumb = ({album}) => (
+const Breadcrumb = ({album, showArchive}) => (
   <ul>
-    <li>Arkiv</li>
-    <li>{album.name}</li>
+    <li onClick={() => { showArchive(); }}>Arkiv</li>
+    {album ? <li>{album.name}</li> : ''}
   </ul>
 );
 
@@ -15,9 +15,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  showArchive: () => {
-    dispatch(selectAlbum(null));
-  },
+  showArchive: (e) => { dispatch(selectAlbum(null)); },
 });
 
 const BreadcrumbContainer = connect(mapStateToProps, mapDispatchToProps)(Breadcrumb);
