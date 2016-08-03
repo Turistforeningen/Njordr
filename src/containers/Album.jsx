@@ -12,6 +12,7 @@ const mapStateToProps = (state) => ({
     state.albums[state.selectedAlbum].photos.length
   ) ?
     state.albums[state.selectedAlbum].photos.map(photo => photo) : [],
+  isFetching: !!state.albums[state.selectedAlbum].isFetching,
 });
 
 const mapDispatchToProps = (dispatch) => ({});

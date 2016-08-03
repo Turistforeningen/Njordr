@@ -18,9 +18,15 @@ const Photos = ({album, photos}) => {
 };
 
 Photos.propTypes = {
+  album: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    description: PropTypes.string,
+  }),
   photos: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
   })).isRequired,
+  isFetching: PropTypes.bool,
 };
 
 export default Photos;
