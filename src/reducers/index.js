@@ -20,7 +20,10 @@ function selectedAlbum(state = null, action) {
 function album(state = {isFetching: false, photos: []}, action) {
   switch (action.type) {
     case REQUEST_ALBUM:
-      return Object.assign({}, state, {isFetching: true});
+      return Object.assign({}, state, {
+        id: action.album,
+        isFetching: true,
+      });
     case RECEIVE_ALBUM:
       return Object.assign({}, state, {
         isFetching: false,
