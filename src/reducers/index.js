@@ -50,7 +50,15 @@ function albums(state = {}, action) {
       return Object.assign(
         {},
         state,
-        action.albums.reduce((previousValue, currentValue, currentIndex, array) => {
+        action.albums.sort((a, b) => {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        }).reduce((previousValue, currentValue, currentIndex, array) => {
           previousValue[currentValue.id] = Object.assign(
             {}, state[currentValue.id], currentValue
           );
