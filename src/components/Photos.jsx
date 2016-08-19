@@ -10,11 +10,13 @@ const Photos = ({album, photos, isFetching}) => {
   return (
     <div>
       {album && album.name ? album.name : 'Album uten navn'}
-      <ul>
+      <div className="ui grid">
         {photos.map(photo =>
-          <Photo key={photo.id} {...photo} />
+          <div key={photo.id} className="four wide column">
+            <Photo {...photo} />
+          </div>
         )}
-      </ul>
+      </div>
     </div>
   );
 };

@@ -5,8 +5,10 @@ import {selectAlbum} from '../actions/index.js';
 
 const Breadcrumb = ({album, showArchive}) => (
   <ul>
-    <li onClick={() => { showArchive(); }}>Arkiv</li>
-    {album ? <li>{album.name}</li> : ''}
+    <li>
+      <a onClick={() => { showArchive(); }}>Arkiv</a>
+    </li>
+    {album ? <li><a>{album.name}</a></li> : ''}
   </ul>
 );
 

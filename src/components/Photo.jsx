@@ -1,10 +1,11 @@
 import React, {PropTypes} from 'react';
 
 const Photo = ({previews, filesize, onPhotoClick}) => (
-  <li>
-    <img src={previews[10].href} />
-    {filesize}
-  </li>
+  <div className="ui card">
+    <div className="image">
+      <img src={previews[10].href} />
+    </div>
+  </div>
 );
 
 Photo.propTypes = {
