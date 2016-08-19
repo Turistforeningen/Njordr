@@ -1,18 +1,20 @@
 import React, {PropTypes} from 'react';
 
-const Photo = ({previews, filesize, onPhotoClick}) => (
+const Photo = ({src, copyright, onPhotoClick}) => (
   <div className="ui card">
     <div className="image">
-      <img src={previews[10].href} />
+      {copyright ? <div className="ui red ribbon label">
+        <i className="copyright icon"></i>
+      </div> : ''}
+      <img src={src} />
     </div>
   </div>
 );
 
 Photo.propTypes = {
   id: PropTypes.string.isRequired,
-  previews: PropTypes.arrayOf(PropTypes.shape({
-    href: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
+  src: PropTypes.string,
+  copyright: PropTypes.string,
 };
 
 export default Photo;

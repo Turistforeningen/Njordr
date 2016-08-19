@@ -13,7 +13,7 @@ const Photos = ({album, photos, isFetching}) => {
       <div className="ui grid">
         {photos.map(photo =>
           <div key={photo.id} className="four wide column">
-            <Photo {...photo} />
+            <Photo id={photo.id} src={photo.previews[10].href} />
           </div>
         )}
       </div>
