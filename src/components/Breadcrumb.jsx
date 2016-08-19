@@ -4,12 +4,11 @@ import {connect} from 'react-redux';
 import {selectAlbum} from '../actions/index.js';
 
 const Breadcrumb = ({album, showArchive}) => (
-  <ul>
-    <li>
-      <a onClick={() => { showArchive(); }}>Arkiv</a>
-    </li>
-    {album ? <li><a>{album.name}</a></li> : ''}
-  </ul>
+  <div className="ui breadcrumb">
+    <a className ="section" onClick={() => { showArchive(); }}>Arkiv</a>
+    {album ? <i className="right chevron icon divider"></i> : ''}
+    {album ? <a className="section">{album.name}</a> : ''}
+  </div>
 );
 
 const mapStateToProps = (state) => ({
