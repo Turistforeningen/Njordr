@@ -7,6 +7,7 @@ import Breadcrumb from './Breadcrumb.jsx';
 import selectAlbum from '../actions/index.js';
 
 require('semantic-ui-css/semantic.css');
+require('../sass/app.scss');
 
 const mapStateToProps = (state) => ({
   selectedAlbum: state.selectedAlbum,
