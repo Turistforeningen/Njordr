@@ -29,6 +29,7 @@ function album(state = {isFetching: false, photos: []}, action) {
       });
     case RECEIVE_ALBUM:
       return Object.assign({}, state, {
+        id: action.album,
         isFetching: false,
         photos: action.photos,
         lastUpdated: action.receivedAt,
