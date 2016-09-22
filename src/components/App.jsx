@@ -13,7 +13,7 @@ const mapStateToProps = (state) => ({
   selectedAlbum: state.selectedAlbum,
 });
 
-const App = ({selectedAlbum, dispatch}) => (
+export const App = ({selectedAlbum, dispatch}) => (
   <div>
     <h1>Njordr</h1>
     <Breadcrumb />
