@@ -39,6 +39,33 @@ export function receiveAlbum(album, json) {
   };
 }
 
+export const SEARCH_ALBUM = 'SEARCH_ALBUM';
+export function searchAlbum(album, term) {
+  return {
+    type: SEARCH_ALBUM,
+    album,
+    term,
+  };
+}
+
+export const RECEIVE_SEARCH_RESULT = 'RECEIVE_SEARCH_RESULT';
+export function receiveSearchResult(album, term, result) {
+  return {
+    type: RECEIVE_SEARCH_RESULT,
+    album,
+    term,
+    result,
+  };
+}
+
+export const CLEAR_SEARCH = 'CLEAR_SEARCH';
+export function clearSearch(album) {
+  return {
+    type: CLEAR_SEARCH,
+    album,
+  };
+}
+
 export function fetchAlbum(album) {
   return function _fetchAlbum(dispatch) {
     dispatch(requestAlbum(album));
@@ -55,5 +82,14 @@ export function fetchAlbums() {
     return fetch('https://skadi.app.dnt.no/v1/albums')
       .then(response => response.json())
       .then(json => dispatch(receiveAlbums(json)));
+  };
+}
+
+export function fetchSearchResult(album, term) {
+  return function _fetchSearchResult(dispatch) {
+    dispatch(searchAlbum(album, term));
+    return fetch(`https://skadi.app.dnt.no/v1/albums/${album}/photos?query=${term}`)
+      .then(response => response.json())
+      .then(json => dispatch(receiveSearchResult(album, term, json)));
   };
 }

@@ -6,6 +6,9 @@ import {
   RECEIVE_ALBUM,
   REQUEST_ALBUMS,
   RECEIVE_ALBUMS,
+  SEARCH_ALBUM,
+  RECEIVE_SEARCH_RESULT,
+  CLEAR_SEARCH,
 } from '../actions/index.js';
 
 function selectedAlbum(state = null, action) {
@@ -30,6 +33,26 @@ function album(state = {isFetching: false, photos: []}, action) {
         photos: action.photos,
         lastUpdated: action.receivedAt,
       });
+    case SEARCH_ALBUM:
+      return Object.assign({}, state, {
+        isSearching: true,
+        term: action.term,
+      });
+    case RECEIVE_SEARCH_RESULT:
+      return Object.assign({}, state, {
+        isSearching: false,
+        hasActiveSearch: true,
+        term: action.term,
+        result: action.result,
+      });
+    case CLEAR_SEARCH:
+      // TODO: Mega hack
+      document.querySelectorAll('input[type="text"]')[0].value = '';
+      return Object.assign({}, state, {
+        term: undefined,
+        hasActiveSearch: false,
+        result: undefined,
+      });
     default:
       return state;
   }
@@ -39,6 +62,9 @@ function albums(state = {}, action) {
   switch (action.type) {
     case REQUEST_ALBUM:
     case RECEIVE_ALBUM:
+    case SEARCH_ALBUM:
+    case RECEIVE_SEARCH_RESULT:
+    case CLEAR_SEARCH:
       return Object.assign(
         {},
         state,
