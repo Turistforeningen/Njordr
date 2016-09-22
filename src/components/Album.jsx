@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import Photo from './Photo.jsx';
 import SearchContainer from '../containers/SearchContainer.jsx';
 
-const Photos = ({album, photos, isFetching, clearSearch}) => {
+const Album = ({album, photos, isFetching, clearSearch}) => {
   if (isFetching) {
     return (<div>Henter bilder...</div>);
   } else if (photos.length === 0) {
@@ -37,7 +37,7 @@ const Photos = ({album, photos, isFetching, clearSearch}) => {
   );
 };
 
-Photos.propTypes = {
+Album.propTypes = {
   album: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string,
@@ -49,4 +49,4 @@ Photos.propTypes = {
   isFetching: PropTypes.bool,
 };
 
-export default Photos;
+export default Album;

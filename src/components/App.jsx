@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import Album from '../containers/Album.jsx';
+import AlbumContainer from '../containers/AlbumContainer.jsx';
 import ArchiveContainer from '../containers/ArchiveContainer.jsx';
 import Breadcrumb from './Breadcrumb.jsx';
 import selectAlbum from '../actions/index.js';
@@ -17,7 +17,7 @@ const App = ({selectedAlbum, dispatch}) => (
   <div>
     <h1>Njordr</h1>
     <Breadcrumb />
-    {selectedAlbum ? <Album /> : <ArchiveContainer />}
+    {selectedAlbum ? <AlbumContainer /> : <ArchiveContainer />}
   </div>
 );
 
