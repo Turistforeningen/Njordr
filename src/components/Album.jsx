@@ -22,7 +22,7 @@ const Album = ({album, photos, isFetching, clearSearch}) => {
   </div>;
 
   return (
-    <div>
+    <div className="album">
       {album && album.name ? album.name : 'Album uten navn'}
       <SearchContainer />
       {album.hasActiveSearch ? activeSearchFilterMessage : ''}
