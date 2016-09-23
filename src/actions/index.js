@@ -93,3 +93,26 @@ export function fetchSearchResult(album, term) {
       .then(json => dispatch(receiveSearchResult(album, term, json)));
   };
 }
+
+export const REQUEST_TAGS = 'REQUEST_TAGS';
+export function requestTags() {
+  return {type: REQUEST_TAGS};
+}
+
+export const RECEIVE_TAGS = 'RECEIVE_TAGS';
+export function receiveTags(json) {
+  return {
+    type: RECEIVE_TAGS,
+    tags: json,
+    receivedAt: Date.now(),
+  };
+}
+
+export function fetchTags() {
+  return function _fetchTags(dispatch) {
+    dispatch(requestAlbums());
+    return fetch('https://skadi.app.dnt.no/v1/tags')
+      .then(response => response.json())
+      .then(json => dispatch(receiveTags(json)));
+  };
+}

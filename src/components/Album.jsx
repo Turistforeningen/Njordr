@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import Photo from './Photo.jsx';
 import SearchContainer from '../containers/SearchContainer.jsx';
+import TagsFilterContainer from '../containers/TagsFilterContainer.jsx';
 
 const Album = ({album, photos, isFetching, clearSearch}) => {
   if (isFetching) {
@@ -25,6 +26,7 @@ const Album = ({album, photos, isFetching, clearSearch}) => {
     <div className="album">
       {album && album.name ? album.name : 'Album uten navn'}
       <SearchContainer />
+      <TagsFilterContainer />
       {album.hasActiveSearch ? activeSearchFilterMessage : ''}
       <div className="ui grid">
         {photos.map(photo =>

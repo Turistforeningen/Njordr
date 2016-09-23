@@ -9,6 +9,8 @@ import {
   SEARCH_ALBUM,
   RECEIVE_SEARCH_RESULT,
   CLEAR_SEARCH,
+  REQUEST_TAGS,
+  RECEIVE_TAGS,
 } from '../actions/index.js';
 
 function selectedAlbum(state = null, action) {
@@ -97,9 +99,21 @@ function albums(state = {}, action) {
   }
 }
 
+function tags(state = [], action) {
+  switch (action.type) {
+    case REQUEST_TAGS:
+      return state;
+    case RECEIVE_TAGS:
+      return action.tags.map(tag => Object.assign({}, tag, {applied: false}));
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   albums,
   selectedAlbum,
+  tags,
 });
 
 export default rootReducer;
