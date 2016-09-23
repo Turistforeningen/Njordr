@@ -29,7 +29,11 @@ const Album = ({album, photos, isFetching, clearSearch}) => {
       <div className="ui grid">
         {photos.map(photo =>
           <div key={photo.id} className="four wide column">
-            <Photo id={photo.id} src={photo.previews[10].href} />
+            <Photo
+              id={photo.id}
+              src={photo.previews[10].href}
+              description={photo.metadata.description}
+            />
           </div>
         )}
       </div>
