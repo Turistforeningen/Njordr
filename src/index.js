@@ -2,9 +2,6 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
 
 import {
   selectAlbum,
@@ -14,11 +11,7 @@ import {
   fetchTags,
 } from './actions/index.js';
 
-const loggerMiddleware = createLogger();
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunkMiddleware, loggerMiddleware)
-);
+import store from './store.js';
 
 store.dispatch(fetchAlbums());
 store.dispatch(fetchTags());
