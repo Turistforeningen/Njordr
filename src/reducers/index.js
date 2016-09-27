@@ -11,6 +11,8 @@ import {
   CLEAR_SEARCH,
   REQUEST_TAGS,
   RECEIVE_TAGS,
+  TOGGLE_TAG,
+  SET_ALBUM_NEEDS_UPDATE,
 } from '../actions/index.js';
 
 function selectedAlbum(state = null, action) {
@@ -56,6 +58,10 @@ function album(state = {isFetching: false, photos: []}, action) {
         hasActiveSearch: false,
         result: undefined,
       });
+    case SET_ALBUM_NEEDS_UPDATE:
+      return Object.assign({}, state, {
+        needsUpdate: action.needsUpdate,
+      });
     default:
       return state;
   }
@@ -68,6 +74,7 @@ function albums(state = {}, action) {
     case SEARCH_ALBUM:
     case RECEIVE_SEARCH_RESULT:
     case CLEAR_SEARCH:
+    case SET_ALBUM_NEEDS_UPDATE:
       return Object.assign(
         {},
         state,
@@ -104,7 +111,13 @@ function tags(state = [], action) {
     case REQUEST_TAGS:
       return state;
     case RECEIVE_TAGS:
-      return action.tags.map(tag => Object.assign({}, tag, {applied: false}));
+      return action.tags.map(tag => Object.assign({}, tag, {isApplied: false}));
+    case TOGGLE_TAG:
+      return state.map(tag => Object.assign(
+        {},
+        tag,
+        {isApplied: action.tag === tag.val ? !tag.isApplied : tag.isApplied}
+      ));
     default:
       return state;
   }

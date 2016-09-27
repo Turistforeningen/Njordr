@@ -16,7 +16,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  showArchive: (e) => { dispatch(selectAlbum(null)); },
+  showArchive: (e) => {
+    dispatch(selectAlbum(null));
+  },
 });
 
 const BreadcrumbContainer = connect(mapStateToProps, mapDispatchToProps)(Breadcrumb);

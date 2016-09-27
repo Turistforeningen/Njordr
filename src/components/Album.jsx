@@ -4,10 +4,23 @@ import SearchContainer from '../containers/SearchContainer.jsx';
 import TagsFilterContainer from '../containers/TagsFilterContainer.jsx';
 
 const Album = ({album, photos, isFetching, clearSearch}) => {
-  if (isFetching) {
-    return (<div>Henter bilder...</div>);
-  } else if (photos.length === 0) {
-    return (<div>Empty album!</div>);
+  function getPhotos() {
+    if (isFetching) {
+      return (<div>Henter bilder...</div>);
+    } else if (photos.length === 0) {
+      return (<div>Ingen bilder i dette albumet.</div>);
+    }
+    return (<div className="ui grid photos">
+      {photos.map(photo =>
+        <div key={photo.id} className="four wide column">
+          <Photo
+            id={photo.id}
+            src={photo.previews[10].href}
+            description={photo.metadata.description}
+          />
+        </div>
+      )}
+    </div>);
   }
 
   const activeSearchFilterMessage = <div>
@@ -23,21 +36,19 @@ const Album = ({album, photos, isFetching, clearSearch}) => {
   </div>;
 
   return (
-    <div className="album">
-      {album && album.name ? album.name : 'Album uten navn'}
-      <SearchContainer />
-      <TagsFilterContainer />
-      {album.hasActiveSearch ? activeSearchFilterMessage : ''}
-      <div className="ui grid">
-        {photos.map(photo =>
-          <div key={photo.id} className="four wide column">
-            <Photo
-              id={photo.id}
-              src={photo.previews[10].href}
-              description={photo.metadata.description}
-            />
+    <div className="ui grid album">
+      <div className="four wide column">
+        <div className="ui fluid vertical menu">
+          <div className="item">
+            <SearchContainer />
           </div>
-        )}
+          <TagsFilterContainer />
+        </div>
+      </div>
+      <div className="twelve wide column">
+        {album && album.name ? album.name : 'Album uten navn'}
+        {album.hasActiveSearch ? activeSearchFilterMessage : ''}
+        {getPhotos()}
       </div>
     </div>
   );

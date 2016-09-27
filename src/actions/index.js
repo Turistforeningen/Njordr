@@ -25,8 +25,12 @@ export function receiveAlbums(json) {
 }
 
 export const REQUEST_ALBUM = 'REQUEST_ALBUM';
-export function requestAlbum(album) {
-  return {type: REQUEST_ALBUM, album};
+export function requestAlbum(album, tags) {
+  return {
+    type: REQUEST_ALBUM,
+    album,
+    tags,
+  };
 }
 
 export const RECEIVE_ALBUM = 'RECEIVE_ALBUM';
@@ -36,6 +40,7 @@ export function receiveAlbum(album, json) {
     album,
     photos: json.data.map(photo => photo),
     receivedAt: Date.now(),
+    needsUpdate: false,
   };
 }
 
@@ -66,11 +71,20 @@ export function clearSearch(album) {
   };
 }
 
-export function fetchAlbum(album) {
+export const SET_ALBUM_NEEDS_UPDATE = 'SET_ALBUM_NEEDS_UPDATE';
+export function setAlbumNeedsUpdate(album, needsUpdate) {
+  return {
+    type: SET_ALBUM_NEEDS_UPDATE,
+    album,
+    needsUpdate,
+  };
+}
+
+export function fetchAlbum(album, tags = []) {
   return function _fetchAlbum(dispatch) {
     dispatch(requestAlbum(album));
-
-    return fetch(`https://skadi.app.dnt.no/v1/albums/${album}/photos`)
+    const tagsStr = tags.length ? `?tags=${tags.join()}` : '';
+    return fetch(`https://skadi.app.dnt.no/v1/albums/${album}/photos${tagsStr}`)
       .then(response => response.json())
       .then(json => dispatch(receiveAlbum(album, json)));
   };
@@ -105,6 +119,14 @@ export function receiveTags(json) {
     type: RECEIVE_TAGS,
     tags: json,
     receivedAt: Date.now(),
+  };
+}
+
+export const TOGGLE_TAG = 'TOGGLE_TAG';
+export function toggleTag(tag) {
+  return {
+    type: TOGGLE_TAG,
+    tag,
   };
 }
 
