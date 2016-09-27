@@ -11,7 +11,7 @@ services:
       - .:/usr/src/app
     environment:
       - NODE_ENV=development
-      - NPM_CONFIG_LOGLEVEL=silent
+      - NPM_CONFIG_LOGLEVEL=verbose
       - NPM_CONFIG_PROGRESS=false
       - NPM_CONFIG_SPIN=false
       - VIRTUAL_HOST=njordr.app.dnt.privat
