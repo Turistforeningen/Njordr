@@ -1,13 +1,12 @@
 import React from 'react';
 
+import AlbumCardContainer from '../components/AlbumCard.jsx';
+
 const Archive = ({albums, selectAlbum}) => (
-  <div>
-    Archive
+  <div className="ui four column grid">
     {(Object.keys(albums).map((key) => (
-      <div key={key}>
-        <a onClick={(e) => { selectAlbum(key); }}>
-          {albums[key].name}
-        </a>
+      <div key={key} className="column">
+        <AlbumCardContainer id={key}/>
       </div>
     )))}
   </div>
