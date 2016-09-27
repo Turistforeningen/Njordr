@@ -6,6 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production cross-env webpack",
     "lint": "eslint src/",
+    "lint:watch": "esw --color --watch src/",
     "nsp": "nsp check",
     "test": "mocha --require ignore-styles test/setup.js test/**/*-test.js",
     "test:watch": "mocha --require ignore-styles --watch test/setup.js test/**/*-test.js",
@@ -38,6 +39,7 @@
     "eslint-loader": "^1.3.0",
     "eslint-plugin-import": "^1.10.0",
     "eslint-plugin-react": "^5.2.2",
+    "eslint-watch": "^2.1.14",
     "file-loader": "^0.9.0",
     "ignore-styles": "^4.0.0",
     "isomorphic-fetch": "^2.2.1",
