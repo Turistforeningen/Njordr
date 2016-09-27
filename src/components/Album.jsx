@@ -46,7 +46,6 @@ const Album = ({album, photos, isFetching, clearSearch}) => {
         </div>
       </div>
       <div className="twelve wide column">
-        {album && album.name ? album.name : 'Album uten navn'}
         {album.hasActiveSearch ? activeSearchFilterMessage : ''}
         {getPhotos()}
       </div>
