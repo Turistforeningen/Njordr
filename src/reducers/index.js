@@ -13,7 +13,17 @@ import {
   RECEIVE_TAGS,
   TOGGLE_TAG,
   SET_ALBUM_NEEDS_UPDATE,
+  TOGGLE_MULTISELECT,
 } from '../actions/index.js';
+
+function app(state = {multiselect: false}, action) {
+  switch (action.type) {
+    case TOGGLE_MULTISELECT:
+      return Object.assign({}, state, {multiselect: action.multiselect});
+    default:
+      return state;
+  }
+}
 
 function selectedAlbum(state = null, action) {
   switch (action.type) {
@@ -124,6 +134,7 @@ function tags(state = [], action) {
 }
 
 const rootReducer = combineReducers({
+  app,
   albums,
   selectedAlbum,
   tags,

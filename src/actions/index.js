@@ -138,6 +138,14 @@ export function selectPhoto(photo) {
   };
 }
 
+export const TOGGLE_MULTISELECT = 'TOGGLE_MULTISELECT';
+export function toggleMultiselect(multiselect) {
+  return {
+    type: TOGGLE_MULTISELECT,
+    multiselect,
+  };
+}
+
 export function confirmSelectedPhotos() {
   // TODO: Implement this
   console.warn('Not implemented yet.');
