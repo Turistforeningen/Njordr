@@ -9,10 +9,12 @@ import {
   fetchAlbum,
   fetchAlbums,
   fetchTags,
+  toggleMultiselect,
 } from './actions/index.js';
 
 import store from './store.js';
 
+store.dispatch(toggleMultiselect(true));
 store.dispatch(fetchAlbums());
 store.dispatch(fetchTags());
 store.dispatch(selectAlbum('5001.6xpe2e7cIM88BTcTtyQ9iQ'));
