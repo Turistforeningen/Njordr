@@ -6,7 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production cross-env webpack",
     "lint": "eslint src/",
-    "lint:watch": "esw --color --watch src/",
+    "lint:watch": "esw --color --watch *.jsx *.js src/",
     "nsp": "nsp check",
     "test": "mocha --require ignore-styles test/setup.js test/**/*-test.js",
     "test:watch": "mocha --require ignore-styles --watch test/setup.js test/**/*-test.js",
