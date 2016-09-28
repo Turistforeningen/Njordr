@@ -130,6 +130,19 @@ export function toggleTag(tag) {
   };
 }
 
+export const SELECT_PHOTO = 'SELECT_PHOTO';
+export function selectPhoto(photo) {
+  return {
+    type: SELECT_PHOTO,
+    photo,
+  };
+}
+
+export function confirmSelectedPhotos() {
+  // TODO: Implement this
+  console.warn('Not implemented yet.');
+}
+
 export function fetchTags() {
   return function _fetchTags(dispatch) {
     dispatch(requestAlbums());
