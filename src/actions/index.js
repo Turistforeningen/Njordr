@@ -81,7 +81,7 @@ export function setAlbumNeedsUpdate(album, needsUpdate) {
 }
 
 export function fetchAlbum(album, tags = []) {
-  return function _fetchAlbum(dispatch) {
+  return (dispatch) => {
     dispatch(requestAlbum(album));
     const tagsStr = tags.length ? `?tags=${tags.join()}` : '';
     return fetch(`https://skadi.app.dnt.no/v1/albums/${album}/photos${tagsStr}`)
@@ -91,7 +91,7 @@ export function fetchAlbum(album, tags = []) {
 }
 
 export function fetchAlbums() {
-  return function _fetchAlbums(dispatch) {
+  return (dispatch) => {
     dispatch(requestAlbums());
     return fetch('https://skadi.app.dnt.no/v1/albums')
       .then(response => response.json())
@@ -100,7 +100,7 @@ export function fetchAlbums() {
 }
 
 export function fetchSearchResult(album, term) {
-  return function _fetchSearchResult(dispatch) {
+  return (dispatch) => {
     dispatch(searchAlbum(album, term));
     return fetch(`https://skadi.app.dnt.no/v1/albums/${album}/photos?query=${term}`)
       .then(response => response.json())
@@ -144,7 +144,7 @@ export function confirmSelectedPhotos() {
 }
 
 export function fetchTags() {
-  return function _fetchTags(dispatch) {
+  return (dispatch) => {
     dispatch(requestAlbums());
     return fetch('https://skadi.app.dnt.no/v1/tags')
       .then(response => response.json())
