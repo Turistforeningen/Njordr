@@ -49,7 +49,7 @@ export const App = ({
       <div className="ui fluid container">
         <a className="header item">FotoWeb</a>
         <a className="item" onClick={() => { showArchive(); }}>Arkiv</a>
-        {Object.keys(albums).length ?
+        {Object.keys(albums || {}).length ?
           <AlbumsDropdown
             album={album}
             albums={albums}
