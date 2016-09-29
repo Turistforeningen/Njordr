@@ -10,6 +10,7 @@ require('semantic-ui-css/semantic.css');
 require('../sass/app.scss');
 
 const mapStateToProps = (state) => ({
+  multiselect: state.app.multiselect,
   selectedAlbum: state.selectedAlbum,
   album: state.albums[state.selectedAlbum],
   albums: state.albums,
@@ -24,7 +25,14 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export const App = ({albums, selectedAlbum, album, showArchive, handleSelectAlbum}) => (
+export const App = ({
+  multiselect,
+  albums,
+  selectedAlbum,
+  album,
+  showArchive,
+  handleSelectAlbum,
+}) => (
   <div>
     <div className="ui fixed inverted menu">
       <div className="ui fluid container">
