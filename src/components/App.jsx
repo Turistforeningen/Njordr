@@ -61,7 +61,7 @@ export const App = ({
   handleSelectAlbum,
 }) => (
   <div>
-    <div className="ui fixed inverted menu">
+    <header className="ui fixed inverted menu">
       <div className="ui fluid container">
         <a className="header item">FotoWeb</a>
         <a className="item" onClick={() => { showArchive(); }}>Arkiv</a>
@@ -74,7 +74,7 @@ export const App = ({
           <div className="item">Henter album...</div>
         }
       </div>
-    </div>
+    </header>
     {selectedAlbum ? <AlbumContainer /> : <ArchiveContainer />}
     <Footer />
   </div>

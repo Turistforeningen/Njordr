@@ -4,7 +4,7 @@ import {shallow, mount, render} from 'enzyme';
 import {App} from '../../src/components/App.jsx';
 
 describe('App', function() {
-  it('renders div', function() {
-    expect(shallow(<App />).find('div')).to.have.length(1);
+  it('renders header', function() {
+    expect(shallow(<App />).find('header')).to.have.length(1);
   });
 });
