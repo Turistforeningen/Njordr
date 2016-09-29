@@ -12,9 +12,11 @@ import {
   REQUEST_TAGS,
   RECEIVE_TAGS,
   TOGGLE_TAG,
-  SET_ALBUM_NEEDS_UPDATE,
+  SET_ALBUM_NEEDS_RELOAD,
   TOGGLE_MULTISELECT,
   TOGGLE_PHOTO,
+  REQUEST_PHOTOS,
+  RECEIVE_PHOTOS,
 } from '../actions/index.js';
 
 function app(state = {multiselect: false, selectedPhotos: []}, action) {
@@ -64,6 +66,20 @@ function album(state = {isFetching: false, photos: []}, action) {
         id: action.album,
         isFetching: false,
         photos: action.photos,
+        pagination: action.pagination,
+        lastUpdated: action.receivedAt,
+      });
+    case REQUEST_PHOTOS:
+      return Object.assign({}, state, {
+        id: action.album.id,
+        isFetching: true,
+      });
+    case RECEIVE_PHOTOS:
+      return Object.assign({}, state, {
+        id: action.album.id,
+        isFetching: false,
+        photos: action.append ? [...state.photos || [], ...action.photos] : action.photos,
+        pagination: action.pagination,
         lastUpdated: action.receivedAt,
       });
     case SEARCH_ALBUM:
@@ -76,7 +92,6 @@ function album(state = {isFetching: false, photos: []}, action) {
         isSearching: false,
         hasActiveSearch: true,
         term: action.term,
-        result: action.result,
       });
     case CLEAR_SEARCH:
       // TODO: Mega hack
@@ -86,9 +101,9 @@ function album(state = {isFetching: false, photos: []}, action) {
         hasActiveSearch: false,
         result: undefined,
       });
-    case SET_ALBUM_NEEDS_UPDATE:
+    case SET_ALBUM_NEEDS_RELOAD:
       return Object.assign({}, state, {
-        needsUpdate: action.needsUpdate,
+        needsReload: action.needsReload,
       });
     default:
       return state;
@@ -102,11 +117,18 @@ function albums(state = {}, action) {
     case SEARCH_ALBUM:
     case RECEIVE_SEARCH_RESULT:
     case CLEAR_SEARCH:
-    case SET_ALBUM_NEEDS_UPDATE:
+    case SET_ALBUM_NEEDS_RELOAD:
       return Object.assign(
         {},
         state,
         {[action.album]: album(state[action.album], action)}
+      );
+    case REQUEST_PHOTOS:
+    case RECEIVE_PHOTOS:
+      return Object.assign(
+        {},
+        state,
+        {[action.album.id]: album(state[action.album.id], action)}
       );
     case REQUEST_ALBUMS:
       return Object.assign({}, state, {});

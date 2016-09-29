@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import TagsFilter from '../components/TagsFilter.jsx';
-import {fetchAlbum, setAlbumNeedsUpdate, toggleTag} from '../actions/index.js';
+import {fetchAlbum, setAlbumNeedsReload, toggleTag} from '../actions/index.js';
 
 const mapStateToProps = (state) => (Object.assign({}, {
   album: state.selectedAlbum,
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => (Object.assign({}, {
 const mapDispatchToProps = (dispatch) => ({
   toggleTag: (tag, album) => {
     dispatch(toggleTag(tag));
-    dispatch(setAlbumNeedsUpdate(album, true));
+    dispatch(setAlbumNeedsReload(album, true));
   },
 });
 

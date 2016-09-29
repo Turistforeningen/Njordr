@@ -1,5 +1,13 @@
 import fetch from 'isomorphic-fetch';
 
+export const SET_ERROR = 'SET_ERROR';
+export function setError(err) {
+  return {
+    type: 'SET_ERROR',
+    err,
+  };
+}
+
 export const SELECT_ALBUM = 'SELECT_ALBUM';
 export function selectAlbum(album) {
   return {type: SELECT_ALBUM, album};
@@ -40,7 +48,20 @@ export function receiveAlbum(album, json) {
     album,
     photos: json.data.map(photo => photo),
     receivedAt: Date.now(),
-    needsUpdate: false,
+    needsReload: false,
+  };
+}
+
+export const RECEIVE_PHOTOS = 'RECEIVE_PHOTOS';
+export function receivePhotos(album, json, append) {
+  return {
+    type: RECEIVE_PHOTOS,
+    album,
+    photos: json.data.map(photo => photo),
+    pagination: {...json.paging, hasMore: json.paging && !!json.paging.next},
+    receivedAt: Date.now(),
+    needsReload: false,
+    append,
   };
 }
 
@@ -54,12 +75,11 @@ export function searchAlbum(album, term) {
 }
 
 export const RECEIVE_SEARCH_RESULT = 'RECEIVE_SEARCH_RESULT';
-export function receiveSearchResult(album, term, result) {
+export function receiveSearchResult(album, term) {
   return {
     type: RECEIVE_SEARCH_RESULT,
     album,
     term,
-    result,
   };
 }
 
@@ -71,40 +91,47 @@ export function clearSearch(album) {
   };
 }
 
-export const SET_ALBUM_NEEDS_UPDATE = 'SET_ALBUM_NEEDS_UPDATE';
-export function setAlbumNeedsUpdate(album, needsUpdate) {
+export const SET_ALBUM_NEEDS_RELOAD = 'SET_ALBUM_NEEDS_RELOAD';
+export function setAlbumNeedsReload(album, needsReload) {
   return {
-    type: SET_ALBUM_NEEDS_UPDATE,
+    type: SET_ALBUM_NEEDS_RELOAD,
     album,
-    needsUpdate,
-  };
-}
-
-export function fetchAlbum(album, tags = []) {
-  return (dispatch) => {
-    dispatch(requestAlbum(album));
-    const tagsStr = tags.length ? `?tags=${tags.join()}` : '';
-    return fetch(`https://skadi.app.dnt.no/v1/albums/${album}/photos${tagsStr}`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveAlbum(album, json)));
+    needsReload,
   };
 }
 
 export function fetchAlbums() {
-  return (dispatch) => {
+  return function(dispatch) { // eslint-disable-line
     dispatch(requestAlbums());
     return fetch('https://skadi.app.dnt.no/v1/albums')
       .then(response => response.json())
-      .then(json => dispatch(receiveAlbums(json)));
+      .then(
+        json => dispatch(receiveAlbums(json)),
+        err => dispatch(setError(err))
+      );
   };
 }
 
-export function fetchSearchResult(album, term) {
-  return (dispatch) => {
-    dispatch(searchAlbum(album, term));
-    return fetch(`https://skadi.app.dnt.no/v1/albums/${album}/photos?query=${term}`)
+export function fetchPhotos(album, tags = []) {
+  return function(dispatch) { // eslint-disable-line
+    const tagsStr = tags.length ? `tags=${tags.join()}` : '';
+    const queryStr = album.term ? `query=${album.term}` : '';
+    const append = !album.needsReload;
+    let url = !album.needsReload && album.pagination ? album.pagination.next : album.photosUrl;
+    if (tagsStr || queryStr) {
+      url = `${url}?${[tagsStr, queryStr].join('&')}`;
+    }
+    dispatch(setAlbumNeedsReload(album.id, false)); // TODO: Fix
+    dispatch(requestAlbum(album.id));
+
+    return fetch(url.replace('http:', 'https:')) // TODO: Ensure HTTPS
       .then(response => response.json())
-      .then(json => dispatch(receiveSearchResult(album, term, json)));
+      .then(json => {
+        // if (album.term) {
+        //   dispatch(receiveSearchResult(album.id, album.term));
+        // }
+        dispatch(receivePhotos(album, json, append));
+      });
   };
 }
 

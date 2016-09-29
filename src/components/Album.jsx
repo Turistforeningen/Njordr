@@ -1,28 +1,37 @@
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
+import InfiniteScroll from 'redux-infinite-scroll';
+
 import PhotoCard from '../containers/PhotoCard.jsx';
 import SearchContainer from '../containers/SearchContainer.jsx';
 import TagsFilterContainer from '../containers/TagsFilterContainer.jsx';
 
-const Album = ({album, photos, isFetching, clearSearch}) => {
-  function getPhotos() {
+class Photos extends Component {
+  render() {
+    const {isFetching, photos} = this.props;
+
     if (isFetching) {
       return (<div>Henter bilder...</div>);
     } else if (photos.length === 0) {
       return (<div>Ingen bilder i dette albumet.</div>);
     }
-    return (<div className="ui grid photos">
-      {photos.map(photo =>
-        <div key={photo.id} className="four wide column">
-          <PhotoCard
-            id={photo.id}
-            src={photo.previews[10].href}
-            description={photo.metadata.description}
-          />
-        </div>
-      )}
-    </div>);
-  }
 
+    return (
+      <div className="ui grid photos">
+        {photos.map(photo =>
+          <div key={photo.id} className="four wide column">
+            <PhotoCard
+              id={photo.id}
+              src={photo.previews[10].href}
+              description={photo.metadata.description}
+            />
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
+const Album = ({album, photos, isFetching, fetchPhotos, clearSearch}) => {
   const activeSearchFilterMessage = <div>
     <div className="ui info message">
       <div className="content">
@@ -46,8 +55,8 @@ const Album = ({album, photos, isFetching, clearSearch}) => {
         </div>
       </div>
       <div className="twelve wide column">
-        {album.hasActiveSearch ? activeSearchFilterMessage : ''}
-        {getPhotos()}
+        {album.term && !album.isFetching ? activeSearchFilterMessage : ''}
+        <Photos album={album} fetchPhotos={fetchPhotos} isFetching={isFetching} photos={photos} />
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import AlbumContainer from '../containers/AlbumContainer.jsx';
 import ArchiveContainer from '../containers/ArchiveContainer.jsx';
 import Breadcrumb from './Breadcrumb.jsx';
-import {selectAlbum} from '../actions/index.js';
+import {fetchPhotos, selectAlbum} from '../actions/index.js';
 import Footer from '../components/Footer.jsx';
 
 require('semantic-ui-css/semantic.css');
@@ -24,7 +24,7 @@ const AlbumsDropdown = ({album, albums, handleSelectAlbum}) => (
         Velg album
       </div>
       {(Object.keys(albums).map((key) => (
-        <div key={key} className="item" onClick={() => { handleSelectAlbum(key); }}>
+        <div key={key} className="item" onClick={() => { handleSelectAlbum(albums[key]); }}>
           <div
             className="ui empty circular label"
             style={{backgroundColor: albums[key].color}}
@@ -73,7 +73,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleSelectAlbum: function handleSelectAlbum(album) {
-    dispatch(selectAlbum(album));
+    dispatch(selectAlbum(album.id));
+    dispatch(fetchPhotos(album));
   },
   showArchive: function showArchive(e) {
     dispatch(selectAlbum(null));
