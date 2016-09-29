@@ -14,12 +14,30 @@ import {
   TOGGLE_TAG,
   SET_ALBUM_NEEDS_UPDATE,
   TOGGLE_MULTISELECT,
+  TOGGLE_PHOTO,
 } from '../actions/index.js';
 
-function app(state = {multiselect: false}, action) {
+function app(state = {multiselect: false, selectedPhotos: []}, action) {
   switch (action.type) {
     case TOGGLE_MULTISELECT:
       return Object.assign({}, state, {multiselect: action.multiselect});
+    case TOGGLE_PHOTO: // eslint-disable-line no-case-declarations
+      const photoIndex = state.selectedPhotos.findIndex(
+        element => element.id === action.photo.id
+      );
+      let selectedPhotos;
+      if (photoIndex === -1) {
+        selectedPhotos = [
+          ...state.selectedPhotos,
+          action.photo,
+        ];
+      } else {
+        selectedPhotos = [
+          ...state.selectedPhotos.slice(0, photoIndex),
+          ...state.selectedPhotos.slice(photoIndex + 1),
+        ];
+      }
+      return Object.assign({}, state, {selectedPhotos});
     default:
       return state;
   }

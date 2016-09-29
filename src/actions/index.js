@@ -130,10 +130,10 @@ export function toggleTag(tag) {
   };
 }
 
-export const SELECT_PHOTO = 'SELECT_PHOTO';
-export function selectPhoto(photo) {
+export const TOGGLE_PHOTO = 'TOGGLE_PHOTO';
+export function togglePhoto(photo) {
   return {
-    type: SELECT_PHOTO,
+    type: TOGGLE_PHOTO,
     photo,
   };
 }
