@@ -148,7 +148,7 @@ export function toggleMultiselect(multiselect) {
 
 export function confirmSelectedPhotos() {
   // TODO: Implement this
-  console.warn('Not implemented yet.');
+  console.warn('Not implemented yet.'); // eslint-disable-line no-console
 }
 
 export function fetchTags() {
