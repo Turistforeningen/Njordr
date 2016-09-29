@@ -10,18 +10,18 @@ const SelectedPhotos = ({selectedPhotos}) => {
   return <div>Du har valgt {selectedPhotos.length} bilder</div>;
 };
 
-const Footer = ({selectedPhotos, insertPhotos}) => (
-  <div className="ui bottom fixed menu">
+export const Footer = ({selectedPhotos, insertPhotos}) => (
+  <footer className="ui bottom fixed menu">
     <div className="ui fluid container">
       <div className="left menu">
         <SelectedPhotos selectedPhotos={selectedPhotos} />
       </div>
       <div className="right menu">
-        <div className="ui default button">Avbryt</div>
-        <div className="ui primary button">Sett inn bilder</div>
+        <button className="ui default button">Avbryt</button>
+        <button className="ui primary button">Sett inn bilder</button>
       </div>
     </div>
-  </div>
+  </footer>
 );
 
 const mapStateToProps = (state) => ({
