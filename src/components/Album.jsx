@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import Photo from './Photo.jsx';
+import PhotoCard from '../containers/PhotoCard.jsx';
 import SearchContainer from '../containers/SearchContainer.jsx';
 import TagsFilterContainer from '../containers/TagsFilterContainer.jsx';
 
@@ -13,7 +13,7 @@ const Album = ({album, photos, isFetching, clearSearch}) => {
     return (<div className="ui grid photos">
       {photos.map(photo =>
         <div key={photo.id} className="four wide column">
-          <Photo
+          <PhotoCard
             id={photo.id}
             src={photo.previews[10].href}
             description={photo.metadata.description}

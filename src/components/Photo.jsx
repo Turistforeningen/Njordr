@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 $.fn.dimmer = require('semantic-ui-dimmer');
 
-import {confirmSelectedPhotos} from '../actions/index.js';
-
 class Photo extends Component {
   componentDidMount() {
     const img = ReactDOM.findDOMNode(this.refs.image);
@@ -13,7 +11,14 @@ class Photo extends Component {
   }
 
   render() {
-    const {id, src, copyright, description} = this.props;
+    const {
+      id,
+      src,
+      copyright,
+      description,
+      selectPhoto,
+      confirmSelectedPhotos,
+    } = this.props;
 
     return (
       <div className="ui card">
@@ -24,7 +29,7 @@ class Photo extends Component {
                 <div
                   className="ui inverted button"
                   onClick={(e) => {
-                    confirmSelectedPhotos();
+                    selectPhoto({id});
                   }}
                 >
                   Sett inn bilde
