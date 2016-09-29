@@ -10,22 +10,6 @@ import Footer from '../components/Footer.jsx';
 require('semantic-ui-css/semantic.css');
 require('../sass/app.scss');
 
-const mapStateToProps = (state) => ({
-  multiselect: state.app.multiselect,
-  selectedAlbum: state.selectedAlbum,
-  album: state.albums[state.selectedAlbum],
-  albums: state.albums,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleSelectAlbum: (album) => {
-    dispatch(selectAlbum(album));
-  },
-  showArchive: (e) => {
-    dispatch(selectAlbum(null));
-  },
-});
-
 const AlbumsDropdown = ({album, albums, handleSelectAlbum}) => (
   <div className="ui simple dropdown item">
     {album ? album.name : 'Velg album'} <i className="dropdown icon"></i>
@@ -79,6 +63,22 @@ export const App = ({
     <Footer />
   </div>
 );
+
+const mapStateToProps = (state) => ({
+  multiselect: state.app.multiselect,
+  selectedAlbum: state.selectedAlbum,
+  album: state.albums[state.selectedAlbum],
+  albums: state.albums,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  handleSelectAlbum: function handleSelectAlbum(album) {
+    dispatch(selectAlbum(album));
+  },
+  showArchive: function showArchive(e) {
+    dispatch(selectAlbum(null));
+  },
+});
 
 const AppConnected = connect(mapStateToProps, mapDispatchToProps)(App);
 
