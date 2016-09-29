@@ -16,4 +16,7 @@ services:
       - NPM_CONFIG_SPIN=false
       - VIRTUAL_HOST=njordr.app.dnt.privat
       - VIRTUAL_PORT=8080
+    logging:
+      options:
+        max-size: "500k"
     command: node ./server.js
