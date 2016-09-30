@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import InfiniteScroll from 'redux-infinite-scroll';
 
 import PhotoCard from '../containers/PhotoCard.jsx';
 import SearchContainer from '../containers/SearchContainer.jsx';
