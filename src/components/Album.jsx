@@ -43,6 +43,7 @@ class Photos extends Component {
         loader={loader}
         loadMore={this.loadMore.bind(this)}
         loadingMore={isFetching}
+        threshold={500}
       />
     );
   }
