@@ -22,7 +22,7 @@ store.dispatch(fetchTags());
 store.dispatch(fetchAlbums())
   .then(() => {
     store.dispatch(selectAlbum(DEFAULT_ALBUM));
-    store.dispatch(fetchPhotos(selectedAlbumSelector(store.getState())));
+    // store.dispatch(fetchPhotos(selectedAlbumSelector(store.getState())));
   });
 
 import App from './components/App.jsx';

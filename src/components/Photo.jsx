@@ -21,7 +21,7 @@ class Photo extends Component {
     } = this.props;
 
     return (
-      <div className="ui card">
+      <div className="card">
         <div className="blurring dimmable image" ref="image">
           <div className="ui dimmer">
             <div className="content">

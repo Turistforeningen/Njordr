@@ -121,15 +121,14 @@ export function fetchPhotos(album, tags = []) {
     if (tagsStr || queryStr) {
       url = `${url}?${[tagsStr, queryStr].join('&')}`;
     }
-    dispatch(setAlbumNeedsReload(album.id, false)); // TODO: Fix
+    // NOTE: requestAlbum has to be first to set isFetching and prevent firing fetch
+    // from redux-infinite-scroll twice (or more)
     dispatch(requestAlbum(album.id));
+    dispatch(setAlbumNeedsReload(album.id, false)); // TODO: Hack to reload if tag filter is set
 
     return fetch(url.replace('http:', 'https:')) // TODO: Ensure HTTPS
       .then(response => response.json())
       .then(json => {
-        // if (album.term) {
-        //   dispatch(receiveSearchResult(album.id, album.term));
-        // }
         dispatch(receivePhotos(album, json, append));
       });
   };

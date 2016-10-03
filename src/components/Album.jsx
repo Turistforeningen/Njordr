@@ -4,28 +4,46 @@ import PhotoCard from '../containers/PhotoCard.jsx';
 import SearchContainer from '../containers/SearchContainer.jsx';
 import TagsFilterContainer from '../containers/TagsFilterContainer.jsx';
 
+
+import InfiniteScroll from 'redux-infinite-scroll';
+
 class Photos extends Component {
+  loadMore() {
+    this.props.fetchPhotos(this.props.album);
+  }
+
+  renderPhotos() {
+    const {photos} = this.props;
+
+    return photos.map(photo => (
+      <PhotoCard
+        id={photo.id}
+        src={photo.previews[10].href}
+        description={photo.metadata.description}
+        key={photo.id}
+      />
+    ));
+  }
+
   render() {
     const {isFetching, photos} = this.props;
-
-    if (isFetching) {
-      return (<div>Henter bilder...</div>);
-    } else if (photos.length === 0) {
-      return (<div>Ingen bilder i dette albumet.</div>);
-    }
+    const loader = (
+      <div className="card">
+        <div className="ui active inverted dimmer">
+          <div className="ui loader"></div>
+        </div>
+      </div>
+    );
 
     return (
-      <div className="ui grid photos">
-        {photos.map(photo =>
-          <div key={photo.id} className="four wide column">
-            <PhotoCard
-              id={photo.id}
-              src={photo.previews[10].href}
-              description={photo.metadata.description}
-            />
-          </div>
-        )}
-      </div>
+      <InfiniteScroll
+        className="ui four cards"
+        elementIsScrollable={false}
+        items={this.renderPhotos()}
+        loader={loader}
+        loadMore={this.loadMore.bind(this)}
+        loadingMore={isFetching}
+      />
     );
   }
 }
