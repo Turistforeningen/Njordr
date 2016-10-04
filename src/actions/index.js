@@ -27,7 +27,7 @@ export const RECEIVE_ALBUMS = 'RECEIVE_ALBUMS';
 export function receiveAlbums(json) {
   return {
     type: RECEIVE_ALBUMS,
-    albums: json.data.map(album => album),
+    albums: json.data.map(album => Object.assign({}, album, {pagination: {hasMore: true}})),
     receivedAt: Date.now(),
   };
 }
