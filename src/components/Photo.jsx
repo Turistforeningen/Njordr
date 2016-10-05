@@ -21,7 +21,7 @@ class Photo extends Component {
     } = this.props;
 
     return (
-      <div className="card">
+      <div className="card photo">
         <div className="blurring dimmable image" ref="image">
           <div className="ui dimmer">
             <div className="content">
@@ -41,7 +41,9 @@ class Photo extends Component {
         </div>
         <div className="content">
           <div className="meta">
-            <span className="description">{description}</span>
+          <div className="description">
+            {description || <span style={{fontStyle: 'italic'}}>{id}</span>}
+          </div>
             {copyright ? <div className="ui red label">
               <i className="copyright icon"></i>
             </div> : ''}
