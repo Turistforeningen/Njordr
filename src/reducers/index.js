@@ -3,7 +3,6 @@ import {
   SELECT_ALBUM,
   SHOW_ROOT,
   REQUEST_ALBUM,
-  RECEIVE_ALBUM,
   REQUEST_ALBUMS,
   RECEIVE_ALBUMS,
   SEARCH_ALBUM,
@@ -60,14 +59,6 @@ function album(state = {isFetching: false, photos: []}, action) {
         id: action.album,
         isFetching: true,
       });
-    case RECEIVE_ALBUM:
-      return Object.assign({}, state, {
-        id: action.album,
-        isFetching: false,
-        photos: action.photos,
-        pagination: action.pagination,
-        lastUpdated: action.receivedAt,
-      });
     case REQUEST_PHOTOS:
       return Object.assign({}, state, {
         id: action.album.id,
@@ -109,7 +100,6 @@ function album(state = {isFetching: false, photos: []}, action) {
 function albums(state = {}, action) {
   switch (action.type) {
     case REQUEST_ALBUM:
-    case RECEIVE_ALBUM:
     case SEARCH_ALBUM:
     case RECEIVE_SEARCH_RESULT:
     case CLEAR_SEARCH:

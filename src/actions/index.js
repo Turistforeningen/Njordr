@@ -46,16 +46,6 @@ export function requestAlbum(album, tags) {
   };
 }
 
-export const RECEIVE_ALBUM = 'RECEIVE_ALBUM';
-export function receiveAlbum(album, json) {
-  return {
-    type: RECEIVE_ALBUM,
-    album,
-    photos: json.data.map(photo => photo),
-    receivedAt: Date.now(),
-  };
-}
-
 export const RECEIVE_PHOTOS = 'RECEIVE_PHOTOS';
 export function receivePhotos(album, json, append) {
   const hasMore = (!!json.paging && !!json.paging.next);
