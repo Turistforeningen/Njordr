@@ -37,6 +37,15 @@ class Photos extends Component {
       </div>
     );
 
+    if (album.isEmpty) {
+      return <div className="ui info message">
+        <div className="header">
+          Ingen bilder
+        </div>
+        <p>Dette albumet inneholder ingen bilder.</p>
+      </div>;
+    }
+
     return (
       <InfiniteScroll
         className="ui four cards"

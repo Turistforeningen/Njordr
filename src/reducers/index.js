@@ -80,6 +80,7 @@ function album(state = {isFetching: false, photos: []}, action) {
         photos: action.append ? [...state.photos || [], ...action.photos] : action.photos,
         pagination: action.pagination,
         lastUpdated: action.receivedAt,
+        isEmpty: action.isEmpty,
       });
     case SEARCH_ALBUM:
       return Object.assign({}, state, {
