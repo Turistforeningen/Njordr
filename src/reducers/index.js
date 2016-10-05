@@ -12,7 +12,6 @@ import {
   REQUEST_TAGS,
   RECEIVE_TAGS,
   TOGGLE_TAG,
-  SET_ALBUM_NEEDS_RELOAD,
   TOGGLE_MULTISELECT,
   TOGGLE_PHOTO,
   REQUEST_PHOTOS,
@@ -101,10 +100,6 @@ function album(state = {isFetching: false, photos: []}, action) {
         hasActiveSearch: false,
         result: undefined,
       });
-    case SET_ALBUM_NEEDS_RELOAD:
-      return Object.assign({}, state, {
-        needsReload: action.needsReload,
-      });
     default:
       return state;
   }
@@ -117,7 +112,6 @@ function albums(state = {}, action) {
     case SEARCH_ALBUM:
     case RECEIVE_SEARCH_RESULT:
     case CLEAR_SEARCH:
-    case SET_ALBUM_NEEDS_RELOAD:
       return Object.assign(
         {},
         state,

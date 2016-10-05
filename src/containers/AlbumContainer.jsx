@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Album from '../components/Album.jsx';
-import {clearSearch, fetchPhotos, setAlbumNeedsReload} from '../actions/index.js';
+import {clearSearch, fetchPhotos} from '../actions/index.js';
 
 const getPhotos = function getPhotos(state) {
   if (state.albums[state.selectedAlbum].hasActiveSearch) {
@@ -30,7 +30,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   clearSearch: (albumId) => {
     dispatch(clearSearch(albumId));
-    dispatch(setAlbumNeedsReload(albumId, true));
   },
 });
 

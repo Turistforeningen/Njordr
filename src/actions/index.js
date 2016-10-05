@@ -48,19 +48,22 @@ export function receiveAlbum(album, json) {
     album,
     photos: json.data.map(photo => photo),
     receivedAt: Date.now(),
-    needsReload: false,
   };
 }
 
 export const RECEIVE_PHOTOS = 'RECEIVE_PHOTOS';
 export function receivePhotos(album, json, append) {
+  const hasMore = (!!json.paging && !!json.paging.next);
+  const photos = json.data.map(photo => photo);
+  const isEmpty = !hasMore && !photos.length;
+
   return {
     type: RECEIVE_PHOTOS,
     album,
-    photos: json.data.map(photo => photo),
-    pagination: {...json.paging, hasMore: json.paging && !!json.paging.next},
+    photos,
+    pagination: {...json.paging, hasMore},
     receivedAt: Date.now(),
-    needsReload: false,
+    isEmpty,
     append,
   };
 }
@@ -91,15 +94,6 @@ export function clearSearch(album) {
   };
 }
 
-export const SET_ALBUM_NEEDS_RELOAD = 'SET_ALBUM_NEEDS_RELOAD';
-export function setAlbumNeedsReload(album, needsReload) {
-  return {
-    type: SET_ALBUM_NEEDS_RELOAD,
-    album,
-    needsReload,
-  };
-}
-
 export function fetchAlbums() {
   return function(dispatch) { // eslint-disable-line
     dispatch(requestAlbums());
@@ -112,19 +106,23 @@ export function fetchAlbums() {
   };
 }
 
-export function fetchPhotos(album, tags = []) {
-  return function(dispatch) { // eslint-disable-line
+export function fetchPhotos(album2, append = true) {
+  return function(dispatch, getState) { // eslint-disable-line
+    const state = getState();
+    const tags = state.tags
+      .filter((item, index, list) => item.isApplied)
+      .map(item => item.val);
+    const album = state.albums[album2.id];
+
     const tagsStr = tags.length ? `tags=${tags.join()}` : '';
     const queryStr = album.term ? `query=${album.term}` : '';
-    const append = !album.needsReload;
-    let url = !album.needsReload && album.pagination ? album.pagination.next : album.photosUrl;
+    let url = append && !!album.pagination && !!album.pagination.next ?
+      album.pagination.next : album.photosUrl;
     if (tagsStr || queryStr) {
       url = `${url}?${[tagsStr, queryStr].join('&')}`;
     }
-    // NOTE: requestAlbum has to be first to set isFetching and prevent firing fetch
-    // from redux-infinite-scroll twice (or more)
+
     dispatch(requestAlbum(album.id));
-    dispatch(setAlbumNeedsReload(album.id, false)); // TODO: Hack to reload if tag filter is set
 
     return fetch(url.replace('http:', 'https:')) // TODO: Ensure HTTPS
       .then(response => response.json())

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TagsFilter = ({album, tags, toggleTag, fetchAlbum}) => (
+const TagsFilter = ({album, tags, toggleTag}) => (
   <div className="item">
     Tags
     <div className="menu">

@@ -9,7 +9,9 @@ import InfiniteScroll from 'redux-infinite-scroll';
 
 class Photos extends Component {
   loadMore() {
-    this.props.fetchPhotos(this.props.album);
+    const {album} = this.props;
+
+    this.props.fetchPhotos(album);
   }
 
   renderPhotos() {
@@ -26,7 +28,7 @@ class Photos extends Component {
   }
 
   render() {
-    const {isFetching, photos} = this.props;
+    const {album, isFetching, photos} = this.props;
     const loader = (
       <div className="card">
         <div className="ui active inverted dimmer">
@@ -44,6 +46,7 @@ class Photos extends Component {
         loadMore={this.loadMore.bind(this)}
         loadingMore={isFetching}
         threshold={500}
+        hasMore={album.pagination.hasMore}
       />
     );
   }
@@ -74,7 +77,12 @@ const Album = ({album, photos, isFetching, fetchPhotos, clearSearch}) => {
       </div>
       <div className="twelve wide column">
         {album.term && !album.isFetching ? activeSearchFilterMessage : ''}
-        <Photos album={album} fetchPhotos={fetchPhotos} isFetching={isFetching} photos={photos} />
+        <Photos
+          album={album}
+          fetchPhotos={fetchPhotos}
+          isFetching={isFetching}
+          photos={photos}
+        />
       </div>
     </div>
   );
