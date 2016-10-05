@@ -111,7 +111,7 @@ export function fetchAlbums() {
   };
 }
 
-export function fetchPhotos(album2, append = true) {
+export function fetchPhotos(albumId, append = true) {
   return function(dispatch, getState) { // eslint-disable-line
     const state = getState();
     const tags = appliedTagsSelector(state);

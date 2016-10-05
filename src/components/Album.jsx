@@ -11,7 +11,7 @@ class Photos extends Component {
   loadMore() {
     const {album} = this.props;
 
-    this.props.fetchPhotos(album);
+    this.props.fetchPhotos(album.id);
   }
 
   renderPhotos() {

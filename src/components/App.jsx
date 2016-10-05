@@ -74,7 +74,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleSelectAlbum: function handleSelectAlbum(album) {
     dispatch(selectAlbum(album.id));
-    dispatch(fetchPhotos(album));
+    dispatch(fetchPhotos(album.id));
   },
   showArchive: function showArchive(e) {
     dispatch(selectAlbum(null));

@@ -12,7 +12,7 @@ const mapStateToProps = (state) => (Object.assign({}, {
 const mapDispatchToProps = (dispatch) => ({
   toggleTag: (tag, album) => {
     dispatch(toggleTag(tag));
-    dispatch(fetchPhotos(album, false));
+    dispatch(fetchPhotos(album.id, false));
   },
 });
 

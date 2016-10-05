@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
     if (e.charCode === 13) {
       const term = e.target.value;
       dispatch(searchAlbum(album.id, term));
-      dispatch(fetchPhotos(album, false));
+      dispatch(fetchPhotos(album.id, false));
     }
   },
 });
