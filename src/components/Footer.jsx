@@ -3,11 +3,23 @@ import {connect} from 'react-redux';
 
 import {confirmSelection} from '../actions/index.js';
 
+const SelectedPhoto = ({photo}) => (
+  <img className="ui circular image" src={photo.previews[8].href} />
+);
+
 const SelectedPhotos = ({selectedPhotos}) => {
   if (selectedPhotos.length === 0) {
     return <div>Du har ikke valgt noen bilder</div>;
   }
-  return <div>Du har valgt {selectedPhotos.length} bilder</div>;
+  return (
+    <div>
+      <div className="ui mini images">
+        {selectedPhotos.map(photo => (
+          <SelectedPhoto key={photo.id} photo={photo} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export const Footer = ({selectedPhotos, insertPhotos}) => (
