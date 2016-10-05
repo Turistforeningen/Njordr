@@ -22,6 +22,7 @@ class Photos extends Component {
         id={photo.id}
         src={photo.previews[10].href}
         description={photo.metadata.description}
+        photo={photo}
         key={photo.id}
       />
     ));

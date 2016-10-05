@@ -18,6 +18,7 @@ class Photo extends Component {
       description,
       selectPhoto,
       confirmSelectedPhotos,
+      photo,
     } = this.props;
 
     return (
@@ -29,7 +30,7 @@ class Photo extends Component {
                 <div
                   className="ui inverted button"
                   onClick={(e) => {
-                    selectPhoto({id});
+                    selectPhoto(photo);
                   }}
                 >
                   Sett inn bilde
