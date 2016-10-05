@@ -1,5 +1,10 @@
 import fetch from 'isomorphic-fetch';
 
+import {
+  appliedTagsSelector,
+  selectedAlbumSelector,
+} from '../selectors/index.js';
+
 export const SET_ERROR = 'SET_ERROR';
 export function setError(err) {
   return {
@@ -109,10 +114,8 @@ export function fetchAlbums() {
 export function fetchPhotos(album2, append = true) {
   return function(dispatch, getState) { // eslint-disable-line
     const state = getState();
-    const tags = state.tags
-      .filter((item, index, list) => item.isApplied)
-      .map(item => item.val);
-    const album = state.albums[album2.id];
+    const tags = appliedTagsSelector(state);
+    const album = selectedAlbumSelector(state);
 
     const tagsStr = tags.length ? `tags=${tags.join()}` : '';
     const queryStr = album.term ? `query=${album.term}` : '';
