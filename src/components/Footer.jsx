@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import {confirmSelection} from '../actions/index.js';
 
+// TODO: Create and use thumbnailSelector to select preview
 const SelectedPhoto = ({photo}) => (
   <img className="ui circular image" src={photo.previews[8].href} />
 );
