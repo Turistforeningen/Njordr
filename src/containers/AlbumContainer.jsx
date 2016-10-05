@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Album from '../components/Album.jsx';
 import {clearSearch, fetchPhotos} from '../actions/index.js';
 
+// TODO: Move to selector
 const getPhotos = function getPhotos(state) {
   if (state.albums[state.selectedAlbum].hasActiveSearch) {
     return state.albums[state.selectedAlbum].result.data.map(photo => photo);
