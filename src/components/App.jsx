@@ -26,16 +26,16 @@ class AlbumsDropdown extends Component {
 
     return (
       <div className="ui dropdown item" ref="dropdown">
-        {album ? album.name : 'Velg album'} <i className="dropdown icon"></i>
+        {album ? album.name : 'Velg arkiv'} <i className="dropdown icon"></i>
         <div className="menu">
           <div className="ui left search icon input">
             <i className="search icon"></i>
-            <input type="text" name="search" placeholder="Finn album..." />
+            <input type="text" name="search" placeholder="Finn arkiv..." />
           </div>
           <div className="divider"></div>
           <div className="header">
             <i className="book icon"></i>
-            Velg album
+            Velg arkiv
           </div>
           {(Object.keys(albums).map((key) => (
             <div key={key} className="item" onClick={() => { handleSelectAlbum(albums[key]); }}>
@@ -64,14 +64,14 @@ export const App = ({
     <header className="ui fixed inverted menu">
       <div className="ui fluid container">
         <a className="header item">FotoWeb</a>
-        <a className="item" onClick={() => { showArchive(); }}>Arkiv</a>
+        <a className="item" onClick={() => { showArchive(); }}>Alle arkiver</a>
         {Object.keys(albums || {}).length ?
           <AlbumsDropdown
             album={album}
             albums={albums}
             handleSelectAlbum={handleSelectAlbum}
           /> :
-          <div className="item">Henter album...</div>
+          <div className="item">Henter arkiver...</div>
         }
       </div>
     </header>

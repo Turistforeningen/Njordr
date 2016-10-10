@@ -4,7 +4,7 @@ const Search = ({album, handleKeyPress}) => (
   <div className="ui fluid icon input">
     <input
       type="text"
-      placeholder="Søk i album"
+      placeholder="Søk i arkiv"
       onKeyPress={(e) => { handleKeyPress(album, e); }}
     />
     <i className="search icon"></i>
