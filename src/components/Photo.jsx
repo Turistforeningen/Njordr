@@ -27,14 +27,14 @@ class Photo extends Component {
           <div className="ui dimmer">
             <div className="content">
               <div className="center">
-                <div
+                <button
                   className="ui inverted button"
-                  onClick={(e) => {
+                  onClick={() => {
                     selectPhoto(photo);
                   }}
                 >
-                  Sett inn bilde
-                </div>
+                  Velg bilde
+                </button>
               </div>
             </div>
           </div>
