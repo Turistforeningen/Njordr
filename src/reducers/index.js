@@ -13,6 +13,7 @@ import {
   TOGGLE_TAG,
   TOGGLE_MULTISELECT,
   TOGGLE_PHOTO,
+  TOGGLE_PHOTO_IN_SELECTION,
   REQUEST_PHOTOS,
   RECEIVE_PHOTOS,
 } from '../actions/index.js';
@@ -21,7 +22,7 @@ function app(state = {multiselect: false, selectedPhotos: []}, action) {
   switch (action.type) {
     case TOGGLE_MULTISELECT:
       return Object.assign({}, state, {multiselect: action.multiselect});
-    case TOGGLE_PHOTO: // eslint-disable-line no-case-declarations
+    case TOGGLE_PHOTO_IN_SELECTION: // eslint-disable-line no-case-declarations
       const photoIndex = state.selectedPhotos.findIndex(
         element => element.id === action.photo.id
       );
@@ -37,7 +38,31 @@ function app(state = {multiselect: false, selectedPhotos: []}, action) {
           ...state.selectedPhotos.slice(photoIndex + 1),
         ];
       }
+
       return Object.assign({}, state, {selectedPhotos});
+    default:
+      return state;
+  }
+}
+
+function photoReducer(state = {}, action) {
+  switch (action.type) {
+    case TOGGLE_PHOTO:
+      return Object.assign({}, state, {isSelected: !state.isSelected});
+    default:
+      return state;
+  }
+}
+
+function photosReducer(state = [], action) {
+  switch (action.type) {
+    case TOGGLE_PHOTO:
+      return state.map((photo) => {
+        if (photo.id === action.photo.id) {
+          return photoReducer(photo, action);
+        }
+        return photo;
+      });
     default:
       return state;
   }
@@ -92,6 +117,10 @@ function album(state = {isFetching: false, photos: []}, action) {
         hasActiveSearch: false,
         result: undefined,
       });
+    case TOGGLE_PHOTO:
+      return Object.assign({}, state, {
+        photos: photosReducer(state.photos, action),
+      });
     default:
       return state;
   }
@@ -114,6 +143,12 @@ function albums(state = {}, action) {
         {},
         state,
         {[action.album.id]: album(state[action.album.id], action)}
+      );
+    case TOGGLE_PHOTO:
+      return Object.assign(
+        {},
+        state,
+        {[action.albumId]: album(state[action.albumId], action)}
       );
     case REQUEST_ALBUMS:
       return Object.assign({}, state, {});

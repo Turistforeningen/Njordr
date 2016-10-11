@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Photo from '../components/Photo.jsx';
 
-import {confirmSelection, togglePhoto} from '../actions/index.js';
+import {confirmSelection, togglePhotoSelection} from '../actions/index.js';
 
 const mapStateToProps = (state) => ({
   selectedPhotos: state.app.selectedPhotos,
@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   selectPhoto: function selectPhoto(photo) {
-    dispatch(togglePhoto(photo));
+    dispatch(togglePhotoSelection(photo));
   },
 });
 

@@ -5,7 +5,7 @@ import $ from 'jquery';
 $.fn.popup = require('semantic-ui-popup');
 $.fn.transition = require('semantic-ui-transition');
 
-import {confirmSelection, togglePhoto} from '../actions/index.js';
+import {confirmSelection, togglePhotoSelection} from '../actions/index.js';
 import {photoThumbnailSelector} from '../selectors/index.js';
 
 // TODO: Create and use thumbnailSelector to select preview
@@ -81,7 +81,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(confirmSelection());
   },
   removePhoto: function removePhoto(photo) {
-    dispatch(togglePhoto(photo));
+    dispatch(togglePhotoSelection(photo));
   },
 });
 

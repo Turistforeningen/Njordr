@@ -152,6 +152,22 @@ export function togglePhoto(photo) {
   return {
     type: TOGGLE_PHOTO,
     photo,
+    albumId: photo.albumId,
+  };
+}
+
+export const TOGGLE_PHOTO_IN_SELECTION = 'TOGGLE_PHOTO_IN_SELECTION';
+export function togglePhotoInSelection(photo, album) {
+  return {
+    type: TOGGLE_PHOTO_IN_SELECTION,
+    photo,
+  };
+}
+
+export function togglePhotoSelection(photo) {
+  return function(dispatch) { // eslint-disable-line
+    dispatch(togglePhotoInSelection(photo)); // Adds or removes from selected photos
+    dispatch(togglePhoto(photo)); // Changes state for on a photo
   };
 }
 
