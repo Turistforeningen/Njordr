@@ -107,15 +107,16 @@ class Photo extends Component {
               </div>
             </div>
           </div>
-          {isAllowed ?
-            <span className="right floated select">
-              <i className="toggle off icon"></i>
-              Velg
-            </span> :
+          <div className="right floated">
+            {isAllowed ?
+              <a onClick={() => { selectPhoto(photo); }} className="select">
+                <i className={`toggle icon ${isSelected ? 'on' : 'off'}`}></i>
+              </a> :
               <span className="right floated">
                 <i className="ban icon"></i>
               </span>
-          }
+            }
+          </div>
         </div>
       </div>
     );
