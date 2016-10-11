@@ -8,6 +8,7 @@ import AlbumContainer from '../containers/AlbumContainer.jsx';
 import ArchiveContainer from '../containers/ArchiveContainer.jsx';
 import Breadcrumb from './Breadcrumb.jsx';
 import {fetchPhotos, selectAlbum} from '../actions/index.js';
+import {currentArchiveSelector} from '../selectors/index.js';
 import Footer from '../components/Footer.jsx';
 
 require('semantic-ui-css/semantic.css');
@@ -55,10 +56,10 @@ class AlbumsDropdown extends Component {
 export const App = ({
   multiselect,
   albums,
-  selectedAlbum,
   album,
   showArchive,
   handleSelectAlbum,
+  app,
 }) => (
   <div>
     <header className="ui fixed inverted menu">
@@ -75,16 +76,17 @@ export const App = ({
         }
       </div>
     </header>
-    {selectedAlbum ? <AlbumContainer /> : <ArchiveContainer />}
+    {app && app.currentArchive ? <AlbumContainer /> : <ArchiveContainer />}
     <Footer />
   </div>
 );
 
 const mapStateToProps = (state) => ({
   multiselect: state.app.multiselect,
-  selectedAlbum: state.selectedAlbum,
-  album: state.albums[state.selectedAlbum],
+  currentArchive: state.app.currentArchive,
+  album: currentArchiveSelector(state),
   albums: state.albums,
+  app: state.app,
 });
 
 const mapDispatchToProps = (dispatch) => ({

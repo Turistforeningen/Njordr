@@ -24,6 +24,8 @@ function app(state = {
   allowedDoctypes: ['image'], // NOTE: Add support for `doctype: 'movie'`
 }, action) {
   switch (action.type) {
+    case SELECT_ALBUM:
+      return Object.assign({}, state, {currentArchive: action.album});
     case TOGGLE_MULTISELECT:
       return Object.assign({}, state, {multiselect: action.multiselect});
     case TOGGLE_PHOTO_IN_SELECTION: // eslint-disable-line no-case-declarations
@@ -68,15 +70,6 @@ function photosReducer(state = [], action) {
         }
         return photo;
       });
-    default:
-      return state;
-  }
-}
-
-function selectedAlbum(state = null, action) {
-  switch (action.type) {
-    case SELECT_ALBUM:
-      return action.album;
     default:
       return state;
   }
@@ -201,7 +194,6 @@ function tags(state = [], action) {
 const rootReducer = combineReducers({
   app,
   albums,
-  selectedAlbum,
   tags,
 });
 

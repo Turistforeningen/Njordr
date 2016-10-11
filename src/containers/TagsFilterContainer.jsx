@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 
 import TagsFilter from '../components/TagsFilter.jsx';
 import {fetchPhotos, toggleTag} from '../actions/index.js';
+import {currentArchiveSelector} from '../selectors/index.js';
 
 const mapStateToProps = (state) => (Object.assign({}, {
-  album: state.albums[state.selectedAlbum],
+  album: currentArchiveSelector(state),
   tags: state.tags,
 }));
 

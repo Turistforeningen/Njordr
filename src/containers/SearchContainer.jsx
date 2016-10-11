@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 
 import Search from '../components/Search.jsx';
 import {searchAlbum, fetchPhotos} from '../actions/index.js';
+import {currentArchiveSelector} from '../selectors/index.js';
 
 const mapStateToProps = (state) => (Object.assign({}, {
-  album: state.albums[state.selectedAlbum],
+  album: currentArchiveSelector(state),
 }));
 
 const mapDispatchToProps = (dispatch) => ({

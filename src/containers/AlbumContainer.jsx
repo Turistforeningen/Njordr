@@ -3,26 +3,12 @@ import {connect} from 'react-redux';
 
 import Album from '../components/Album.jsx';
 import {clearSearch, fetchPhotos} from '../actions/index.js';
-
-// TODO: Move to selector
-const getPhotos = function getPhotos(state) {
-  if (state.albums[state.selectedAlbum].hasActiveSearch) {
-    return state.albums[state.selectedAlbum].result.data.map(photo => photo);
-  } else if (
-    state.selectedAlbum &&
-    state.albums[state.selectedAlbum] &&
-    state.albums[state.selectedAlbum].photos &&
-    state.albums[state.selectedAlbum].photos.length
-  ) {
-    return state.albums[state.selectedAlbum].photos.map(photo => photo);
-  }
-  return [];
-};
+import {currentArchiveSelector, currentArchivePhotosSelector} from '../selectors/index.js';
 
 const mapStateToProps = (state) => ({
-  album: state.albums[state.selectedAlbum],
-  photos: getPhotos(state),
-  isFetching: !!state.albums[state.selectedAlbum].isFetching,
+  album: currentArchiveSelector(state),
+  photos: currentArchivePhotosSelector(state),
+  isFetching: !!currentArchiveSelector(state).isFetching,
 });
 
 const mapDispatchToProps = (dispatch) => ({
