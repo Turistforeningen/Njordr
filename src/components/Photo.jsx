@@ -101,8 +101,8 @@ class Photo extends Component {
                 <div className="item">
                   <i className="tag icon"></i>
                   <div className="content">
-                    {photo.metadata.tags.map((tag, index) => (
-                      `${tag}${index === (photo.metadata.tags.length - 1) ? '' : ','} `
+                    {photo.metadata.tags.map((tag, index, array) => (
+                      `${tag}${index < (array.length - 1) ? ', ' : ''}`
                     ))}
                   </div>
                 </div>
