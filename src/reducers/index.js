@@ -27,6 +27,7 @@ function app(state = {multiselect: false, selectedPhotos: []}, action) {
         element => element.id === action.photo.id
       );
       let selectedPhotos;
+
       if (photoIndex === -1) {
         selectedPhotos = [
           ...state.selectedPhotos,
