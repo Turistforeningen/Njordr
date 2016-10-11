@@ -24,6 +24,7 @@ class Photos extends Component {
         description={photo.metadata.description}
         photo={photo}
         key={photo.id}
+        isSelected={photo.isSelected}
       />
     ));
   }

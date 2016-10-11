@@ -29,12 +29,13 @@ class Photo extends Component {
       confirmSelectedPhotos,
       photo,
       app,
+      isSelected,
     } = this.props;
 
     const isAllowed = app.allowedDoctypes.indexOf(photo.doctype) > -1;
 
     return (
-      <div className="card photo">
+      <div className={`ui ${isSelected ? 'raised ' : ''}card photo`}>
         <div className="blurring dimmable image" ref="image">
           <div className="ui dimmer">
             <div className="content">
@@ -47,7 +48,8 @@ class Photo extends Component {
                       selectPhoto(photo);
                     }}
                   >
-                    Velg bilde
+                    {isSelected ? <i className="remove icon"></i> : <i className="add icon"></i>}
+                    {isSelected ? 'Fjern fra valgte' : 'Velg bilde'}
                   </button> :
                   <div
                     className="ui inverted button disabled"
