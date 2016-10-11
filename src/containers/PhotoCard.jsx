@@ -5,7 +5,7 @@ import Photo from '../components/Photo.jsx';
 import {confirmSelection, togglePhotoSelection} from '../actions/index.js';
 
 const mapStateToProps = (state) => ({
-  selectedPhotos: state.app.selectedPhotos,
+  app: state.app,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -28,7 +28,10 @@ class Photo extends Component {
       selectPhoto,
       confirmSelectedPhotos,
       photo,
+      app,
     } = this.props;
+
+    const isAllowed = app.allowedDoctypes.indexOf(photo.doctype) > -1;
 
     return (
       <div className="card photo">
@@ -36,14 +39,22 @@ class Photo extends Component {
           <div className="ui dimmer">
             <div className="content">
               <div className="center">
-                <button
-                  className="ui inverted button"
-                  onClick={() => {
-                    selectPhoto(photo);
-                  }}
-                >
-                  Velg bilde
-                </button>
+                {
+                  isAllowed ?
+                  <button
+                    className="ui inverted button"
+                    onClick={() => {
+                      selectPhoto(photo);
+                    }}
+                  >
+                    Velg bilde
+                  </button> :
+                  <div
+                    className="ui inverted button disabled"
+                    >
+                    Kan ikke velge denne typen ({photo.doctype})
+                  </div>
+                }
               </div>
             </div>
           </div>
@@ -96,10 +107,15 @@ class Photo extends Component {
               </div>
             </div>
           </div>
-          <span className="right floated select">
-            <i className="toggle off icon"></i>
-            Velg
-          </span>
+          {isAllowed ?
+            <span className="right floated select">
+              <i className="toggle off icon"></i>
+              Velg
+            </span> :
+              <span className="right floated">
+                <i className="ban icon"></i>
+              </span>
+          }
         </div>
       </div>
     );

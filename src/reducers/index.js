@@ -18,7 +18,11 @@ import {
   RECEIVE_PHOTOS,
 } from '../actions/index.js';
 
-function app(state = {multiselect: false, selectedPhotos: []}, action) {
+function app(state = {
+  multiselect: false,
+  selectedPhotos: [],
+  allowedDoctypes: ['image'], // NOTE: Add support for `doctype: 'movie'`
+}, action) {
   switch (action.type) {
     case TOGGLE_MULTISELECT:
       return Object.assign({}, state, {multiselect: action.multiselect});
