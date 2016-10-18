@@ -66,7 +66,12 @@ export const Footer = ({selectedPhotos, insertPhotos, removePhoto}) => (
       </div>
       <div className="right menu">
         <button className="ui default button">Avbryt</button>
-        <button className="ui primary button">Sett inn bilder</button>
+        {
+          selectedPhotos.length === 0 ?
+          <button className="ui primary disabled button">Sett inn bilder</button>
+          :
+          <button className="ui primary button">Sett inn {selectedPhotos.length} bilder</button>
+        }
       </div>
     </div>
   </footer>
