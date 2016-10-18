@@ -102,6 +102,17 @@ class Photo extends Component {
             }
           </div>
         </div>
+        {
+          isAllowed ?
+          <div className="ui bottom attached button" onClick={() => { selectPhoto(photo); }}>
+            {isSelected ? <i className="remove icon"></i> : <i className="add icon"></i>}
+            {isSelected ? 'Fjern fra valgte' : 'Velg bilde'}
+          </div>
+          :
+          <div className="ui bottom attached disabled button">
+            <i className="add icon"></i> Velg bilde
+          </div>
+        }
       </div>
     );
   }
