@@ -94,12 +94,7 @@ class Photo extends Component {
                 <div className="item">
                   <i className="camera icon"></i>
                   <div className="content">
-                    {photo.metadata.photographers.map((photographer, index) => (
-                      `
-                        ${photographer}
-                        ${index === (photo.metadata.photographers.length - 1) ? '' : ','}
-                      `
-                    ))}
+                    {photo.metadata.photographers.join(', ')}
                   </div>
                 </div>
                 <div className="item">
@@ -111,9 +106,7 @@ class Photo extends Component {
                 <div className="item">
                   <i className="tag icon"></i>
                   <div className="content">
-                    {photo.metadata.tags.map((tag, index, array) => (
-                      `${tag}${index < (array.length - 1) ? ', ' : ''}`
-                    ))}
+                    {photo.metadata.tags.join(', ')}
                   </div>
                 </div>
               </div>
