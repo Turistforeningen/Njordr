@@ -8,11 +8,6 @@ $.fn.transition = require('semantic-ui-transition');
 
 class Photo extends Component {
   componentDidMount() {
-    // Setup photo blur
-    const img = ReactDOM.findDOMNode(this.refs.image);
-    const $img = $(img);
-    $img.dimmer({on: 'hover'});
-
     // Setup description popup
     const descriptionPopupTrigger = ReactDOM.findDOMNode(this.refs.description);
     const $descriptionPopupTrigger = $(descriptionPopupTrigger);
@@ -41,30 +36,11 @@ class Photo extends Component {
 
     return (
       <div className={`ui ${isSelected ? 'raised ' : ''}card photo`}>
-        <div className="blurring dimmable image" ref="image">
-          <div className="ui dimmer">
-            <div className="content">
-              <div className="center">
-                {
-                  isAllowed ?
-                  <button
-                    className="ui inverted button"
-                    onClick={() => {
-                      selectPhoto(photo);
-                    }}
-                  >
-                    {isSelected ? <i className="remove icon"></i> : <i className="add icon"></i>}
-                    {isSelected ? 'Fjern fra valgte' : 'Velg bilde'}
-                  </button> :
-                  <div
-                    className="ui inverted button disabled"
-                    >
-                    Kan ikke velge denne typen ({photo.doctype})
-                  </div>
-                }
-              </div>
-            </div>
-          </div>
+        <div className="ui image">
+          {copyright ?
+            <a className="ui right red ribbon label">
+              <i className="warning icon"></i> Bruksbegrensing
+            </a> : ''}
           <img src={src} />
         </div>
         <div className="content">
@@ -77,9 +53,6 @@ class Photo extends Component {
                 {description || 'Ingen bildetekst'}
               </div>
             </div>
-            {copyright ? <div className="ui red label">
-              <i className="copyright icon"></i>
-            </div> : ''}
           </div>
         </div>
         <div className="extra content">
