@@ -111,6 +111,7 @@ export function fetchPhotos(albumId, append = true) {
     const queryStr = album.term ? `query=${album.term}` : '';
     let url = !!append && !!album.pagination && !!album.pagination.next ?
       album.pagination.next : album.photosUrl;
+
     if (tagsStr || queryStr) {
       url = `${url}?${[tagsStr, queryStr].join('&')}`;
     }
