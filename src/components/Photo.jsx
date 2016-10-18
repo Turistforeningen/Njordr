@@ -102,7 +102,7 @@ class Photo extends Component {
           </div>
           <div className="right floated">
             <a className="description" ref="description">
-              <i className="align left icon"></i>
+              <i className="align left icon"></i> Tekst
             </a>
             <div className="ui inverted popup top center">
               <div className="content">
