@@ -15,7 +15,7 @@ const SelectPhotoButton = ({photo, isSelected, isAllowed, selectPhoto}) => {
     );
   } else if (isSelected) {
     return (
-      <div className="ui bottom attached button" onClick={() => { selectPhoto(photo); }}>
+      <div className="ui black bottom attached button" onClick={() => { selectPhoto(photo); }}>
         <i className="remove icon"></i> Fjern fra valgte
       </div>
     );
