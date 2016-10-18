@@ -82,6 +82,12 @@ class Photo extends Component {
                     {photo.metadata.tags.join(', ')}
                   </div>
                 </div>
+                <div className="item">
+                  <i className="copyright icon"></i>
+                  <div className="content">
+                    {photo.metadata.copyright ? photo.metadata.copyright : 'Kan brukes fritt'}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
