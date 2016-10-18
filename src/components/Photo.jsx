@@ -6,6 +6,28 @@ $.fn.dimmer = require('semantic-ui-dimmer');
 $.fn.popup = require('semantic-ui-popup');
 $.fn.transition = require('semantic-ui-transition');
 
+const SelectPhotoButton = ({photo, isSelected, isAllowed, selectPhoto}) => {
+  if (!isAllowed) {
+    return (
+      <div className="ui bottom attached button">
+        <i className="add icon"></i> Velg bilde
+      </div>
+    );
+  } else if (isSelected) {
+    return (
+      <div className="ui bottom attached button" onClick={() => { selectPhoto(photo); }}>
+        <i className="remove icon"></i> Fjern fra valgte
+      </div>
+    );
+  }
+
+  return (
+    <div className="ui bottom attached button" onClick={() => { selectPhoto(photo); }}>
+      <i className="add icon"></i> Velg bilde
+    </div>
+  );
+};
+
 class Photo extends Component {
   componentDidMount() {
     // Setup description popup
@@ -43,22 +65,9 @@ class Photo extends Component {
             </a> : ''}
           <img src={src} />
         </div>
-        <div className="content">
-          <div className="meta">
-            <div className="description" ref="description">
-              {description || <span style={{fontStyle: 'italic'}}>{id}</span>}
-            </div>
-            <div className="ui inverted popup top center">
-              <div className="content">
-                {description || 'Ingen bildetekst'}
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="extra content">
           <a className="left floated info" ref="meta">
-            <i className="info icon"></i>
-            Info
+            <i className="info icon"></i> Info
           </a>
           <div className="ui popup top center">
             <div className="header">{id.length > 15 ? `${id.substring(0, 12)}...` : id}</div>
@@ -92,27 +101,22 @@ class Photo extends Component {
             </div>
           </div>
           <div className="right floated">
-            {isAllowed ?
-              <a onClick={() => { selectPhoto(photo); }} className="select">
-                <i className={`toggle icon ${isSelected ? 'on' : 'off'}`}></i>
-              </a> :
-              <span className="right floated">
-                <i className="ban icon"></i>
-              </span>
-            }
+            <a className="description" ref="description">
+              <i className="align left icon"></i>
+            </a>
+            <div className="ui inverted popup top center">
+              <div className="content">
+                {description || 'Ingen bildetekst'}
+              </div>
+            </div>
           </div>
         </div>
-        {
-          isAllowed ?
-          <div className="ui bottom attached button" onClick={() => { selectPhoto(photo); }}>
-            {isSelected ? <i className="remove icon"></i> : <i className="add icon"></i>}
-            {isSelected ? 'Fjern fra valgte' : 'Velg bilde'}
-          </div>
-          :
-          <div className="ui bottom attached disabled button">
-            <i className="add icon"></i> Velg bilde
-          </div>
-        }
+        <SelectPhotoButton
+          photo={photo}
+          isSelected={isSelected}
+          isAllowed={isAllowed}
+          selectPhoto={selectPhoto}
+        />
       </div>
     );
   }
