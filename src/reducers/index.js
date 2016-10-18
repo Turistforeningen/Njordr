@@ -16,6 +16,7 @@ import {
   TOGGLE_PHOTO_IN_SELECTION,
   REQUEST_PHOTOS,
   RECEIVE_PHOTOS,
+  CLEAR_PHOTOS,
 } from '../actions/index.js';
 
 function appReducer(state = {
@@ -96,6 +97,8 @@ function albumReducer(state = {isFetching: false, photos: []}, action) {
         lastUpdated: action.receivedAt,
         isEmpty: action.isEmpty,
       });
+    case CLEAR_PHOTOS:
+      return {...state, photos: []};
     case SEARCH_ALBUM:
       return Object.assign({}, state, {
         isSearching: true,
@@ -137,6 +140,7 @@ function albumsReducer(state = {}, action) {
       );
     case REQUEST_PHOTOS:
     case RECEIVE_PHOTOS:
+    case CLEAR_PHOTOS:
       return Object.assign(
         {},
         state,

@@ -89,6 +89,14 @@ export function clearSearch(album) {
   };
 }
 
+export const CLEAR_PHOTOS = 'CLEAR_PHOTOS';
+export function clearPhotos(album) {
+  return {
+    type: CLEAR_PHOTOS,
+    album,
+  };
+}
+
 export function fetchAlbums() {
   return function(dispatch) { // eslint-disable-line
     dispatch(requestAlbums());
@@ -114,6 +122,10 @@ export function fetchPhotos(albumId, append = true) {
 
     if (tagsStr || queryStr) {
       url = `${url}?${[tagsStr, queryStr].join('&')}`;
+    }
+
+    if (append === false) {
+      dispatch(clearPhotos(album));
     }
 
     dispatch(requestAlbum(album.id));
