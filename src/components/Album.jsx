@@ -32,13 +32,16 @@ class Photos extends Component {
 
   render() {
     const {album, isFetching, photos} = this.props;
-    const loader = (
-      <div className="card">
-        <div className="ui active inverted dimmer">
-          <div className="ui loader"></div>
+    const loader = photos.length === 0 ?
+      <div className="ui active centered loader"></div>
+      :
+      (
+        <div className="card">
+          <div className="ui active inverted dimmer">
+            <div className="ui loader"></div>
+          </div>
         </div>
-      </div>
-    );
+      );
 
     if (album.isEmpty) {
       return <div className="ui info message">
