@@ -18,7 +18,7 @@ import {
   RECEIVE_PHOTOS,
 } from '../actions/index.js';
 
-function app(state = {
+function appReducer(state = {
   multiselect: false,
   selectedPhotos: [],
   allowedDoctypes: ['image'], // NOTE: Add support for `doctype: 'movie'`
@@ -75,7 +75,7 @@ function photosReducer(state = [], action) {
   }
 }
 
-function album(state = {isFetching: false, photos: []}, action) {
+function albumReducer(state = {isFetching: false, photos: []}, action) {
   switch (action.type) {
     case REQUEST_ALBUM:
       return Object.assign({}, state, {
@@ -124,7 +124,7 @@ function album(state = {isFetching: false, photos: []}, action) {
   }
 }
 
-function albums(state = {}, action) {
+function albumsReducer(state = {}, action) {
   switch (action.type) {
     case REQUEST_ALBUM:
     case SEARCH_ALBUM:
@@ -133,20 +133,20 @@ function albums(state = {}, action) {
       return Object.assign(
         {},
         state,
-        {[action.album]: album(state[action.album], action)}
+        {[action.album]: albumReducer(state[action.album], action)}
       );
     case REQUEST_PHOTOS:
     case RECEIVE_PHOTOS:
       return Object.assign(
         {},
         state,
-        {[action.album.id]: album(state[action.album.id], action)}
+        {[action.album.id]: albumReducer(state[action.album.id], action)}
       );
     case TOGGLE_PHOTO:
       return Object.assign(
         {},
         state,
-        {[action.albumId]: album(state[action.albumId], action)}
+        {[action.albumId]: albumReducer(state[action.albumId], action)}
       );
     case REQUEST_ALBUMS:
       return Object.assign({}, state, {});
@@ -174,7 +174,7 @@ function albums(state = {}, action) {
   }
 }
 
-function tags(state = [], action) {
+function tagsReducer(state = [], action) {
   switch (action.type) {
     case REQUEST_TAGS:
       return state;
@@ -192,9 +192,9 @@ function tags(state = [], action) {
 }
 
 const rootReducer = combineReducers({
-  app,
-  albums,
-  tags,
+  app: appReducer,
+  albums: albumsReducer,
+  tags: tagsReducer,
 });
 
 export default rootReducer;
