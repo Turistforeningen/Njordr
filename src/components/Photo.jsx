@@ -13,6 +13,11 @@ class Photo extends Component {
     const $img = $(img);
     $img.dimmer({on: 'hover'});
 
+    // Setup description popup
+    const descriptionPopupTrigger = ReactDOM.findDOMNode(this.refs.description);
+    const $descriptionPopupTrigger = $(descriptionPopupTrigger);
+    $descriptionPopupTrigger.popup({hoverable: true, lastResort: true});
+
     // Setup meta popup
     const metaPopupTrigger = ReactDOM.findDOMNode(this.refs.meta);
     const $metaPopupTrigger = $(metaPopupTrigger);
@@ -64,9 +69,14 @@ class Photo extends Component {
         </div>
         <div className="content">
           <div className="meta">
-          <div className="description">
-            {description || <span style={{fontStyle: 'italic'}}>{id}</span>}
-          </div>
+            <div className="description" ref="description">
+              {description || <span style={{fontStyle: 'italic'}}>{id}</span>}
+            </div>
+            <div className="ui inverted popup top center">
+              <div className="content">
+                {description || 'Ingen bildetekst'}
+              </div>
+            </div>
             {copyright ? <div className="ui red label">
               <i className="copyright icon"></i>
             </div> : ''}
