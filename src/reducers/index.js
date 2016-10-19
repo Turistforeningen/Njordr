@@ -2,7 +2,6 @@ import {combineReducers} from 'redux';
 
 import {
   SELECT_ALBUM,
-  SHOW_ROOT,
   REQUEST_PHOTOS,
   REQUEST_ALBUMS,
   RECEIVE_ALBUMS,

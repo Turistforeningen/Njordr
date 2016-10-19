@@ -18,11 +18,6 @@ export function selectAlbum(album) {
   return {type: SELECT_ALBUM, album};
 }
 
-export const SHOW_ROOT = 'SHOW_ROOT';
-export function showRoot() {
-  return {type: SHOW_ROOT};
-}
-
 export const REQUEST_ALBUMS = 'REQUEST_ALBUMS';
 export function requestAlbums() {
   return {type: REQUEST_ALBUMS};
