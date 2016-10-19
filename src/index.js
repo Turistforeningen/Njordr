@@ -16,6 +16,7 @@ import {selectedAlbumSelector} from './selectors/index.js';
 import store from './store.js';
 
 const DEFAULT_ALBUM = '5001.6xpe2e7cIM88BTcTtyQ9iQ'; // NOTE: Oslo
+// const DEFAULT_ALBUM = '5059.kNjs4vfT0Zncic-MampLmA'; // NOTE: No pagination
 // const DEFAULT_ALBUM = '5069.lz9s-1s6qfMvh6uLBFNppQ'; // NOTE: Empty
 
 store.dispatch(toggleMultiselect(true));
