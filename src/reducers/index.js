@@ -3,7 +3,7 @@ import {combineReducers} from 'redux';
 import {
   SELECT_ALBUM,
   SHOW_ROOT,
-  REQUEST_ALBUM,
+  REQUEST_PHOTOS,
   REQUEST_ALBUMS,
   RECEIVE_ALBUMS,
   SEARCH_ALBUM,
@@ -78,7 +78,7 @@ function photosReducer(state = [], action) {
 
 function albumReducer(state = {isFetching: false, photos: []}, action) {
   switch (action.type) {
-    case REQUEST_ALBUM:
+    case REQUEST_PHOTOS:
       return Object.assign({}, state, {
         id: action.album,
         isFetching: true,
@@ -124,7 +124,7 @@ function albumReducer(state = {isFetching: false, photos: []}, action) {
 
 function albumsReducer(state = {}, action) {
   switch (action.type) {
-    case REQUEST_ALBUM:
+    case REQUEST_PHOTOS:
     case SEARCH_ALBUM:
     case RECEIVE_SEARCH_RESULT:
     case CLEAR_SEARCH:

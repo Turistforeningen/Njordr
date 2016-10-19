@@ -37,10 +37,10 @@ export function receiveAlbums(json) {
   };
 }
 
-export const REQUEST_ALBUM = 'REQUEST_ALBUM';
-export function requestAlbum(album, tags) {
+export const REQUEST_PHOTOS = 'REQUEST_PHOTOS';
+export function requestPhotos(album, tags) {
   return {
-    type: REQUEST_ALBUM,
+    type: REQUEST_PHOTOS,
     album,
     tags,
   };
@@ -128,7 +128,7 @@ export function fetchPhotos(albumId, append = true) {
       dispatch(clearPhotos(album));
     }
 
-    dispatch(requestAlbum(album.id));
+    dispatch(requestPhotos(album.id));
 
     return fetch(url.replace('http:', 'https:')) // TODO: Ensure HTTPS
       .then(response => response.json())
