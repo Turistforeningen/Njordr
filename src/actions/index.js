@@ -13,9 +13,9 @@ export function setError(err) {
   };
 }
 
-export const SELECT_ALBUM = 'SELECT_ALBUM';
-export function selectAlbum(album) {
-  return {type: SELECT_ALBUM, album};
+export const SET_CURRENT_ARCHIVE = 'SET_CURRENT_ARCHIVE';
+export function setCurrentArchive(archive) {
+  return {type: SET_CURRENT_ARCHIVE, archive};
 }
 
 export const REQUEST_ALBUMS = 'REQUEST_ALBUMS';

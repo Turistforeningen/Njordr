@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import {selectAlbum} from '../actions/index.js';
+import {setCurrentArchive} from '../actions/index.js';
 import {currentArchiveSelector} from '../selectors/index.js';
 
 const Breadcrumb = ({album, showArchive}) => (
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   showArchive: (e) => {
-    dispatch(selectAlbum(null));
+    dispatch(setCurrentArchive(null));
   },
 });
 

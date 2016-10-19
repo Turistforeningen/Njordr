@@ -3,7 +3,7 @@ import {combineReducers} from 'redux';
 import {
   TOGGLE_MULTISELECT,
   TOGGLE_PHOTO_IN_SELECTION,
-  SELECT_ALBUM,
+  SET_CURRENT_ARCHIVE,
   REQUEST_ALBUMS,
   RECEIVE_ALBUMS,
   SEARCH_ALBUM,
@@ -23,8 +23,8 @@ function appReducer(state = {
   allowedDoctypes: ['image'], // NOTE: Add support for `doctype: 'movie'`
 }, action) {
   switch (action.type) {
-    case SELECT_ALBUM:
-      return Object.assign({}, state, {currentArchive: action.album});
+    case SET_CURRENT_ARCHIVE:
+      return Object.assign({}, state, {currentArchive: action.archive});
     case TOGGLE_MULTISELECT:
       return Object.assign({}, state, {multiselect: action.multiselect});
     case TOGGLE_PHOTO_IN_SELECTION: // eslint-disable-line no-case-declarations

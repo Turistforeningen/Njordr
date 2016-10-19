@@ -7,7 +7,7 @@ $.fn.dropdown = require('semantic-ui-dropdown');
 import AlbumContainer from '../containers/AlbumContainer.jsx';
 import ArchiveContainer from '../containers/ArchiveContainer.jsx';
 import Breadcrumb from './Breadcrumb.jsx';
-import {fetchPhotos, selectAlbum} from '../actions/index.js';
+import {fetchPhotos, setCurrentArchive} from '../actions/index.js';
 import {currentArchiveSelector} from '../selectors/index.js';
 import Footer from '../components/Footer.jsx';
 
@@ -91,10 +91,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleSelectAlbum: function handleSelectAlbum(album) {
-    dispatch(selectAlbum(album.id));
+    dispatch(setCurrentArchive(album.id));
   },
   showArchive: function showArchive(e) {
-    dispatch(selectAlbum(null));
+    dispatch(setCurrentArchive(null));
   },
 });
 

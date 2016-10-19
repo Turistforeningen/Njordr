@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 
 import {
-  selectAlbum,
+  setCurrentArchive,
   fetchAlbums,
   fetchPhotos,
   fetchTags,
@@ -23,7 +23,7 @@ store.dispatch(toggleMultiselect(true));
 store.dispatch(fetchTags());
 store.dispatch(fetchAlbums())
   .then(() => {
-    store.dispatch(selectAlbum(DEFAULT_ALBUM));
+    store.dispatch(setCurrentArchive(DEFAULT_ALBUM));
   });
 
 import App from './components/App.jsx';
