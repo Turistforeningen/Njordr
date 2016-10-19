@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux';
 
 import {
+  TOGGLE_MULTISELECT,
+  TOGGLE_PHOTO_IN_SELECTION,
   SELECT_ALBUM,
-  REQUEST_PHOTOS,
   REQUEST_ALBUMS,
   RECEIVE_ALBUMS,
   SEARCH_ALBUM,
@@ -10,11 +11,10 @@ import {
   REQUEST_TAGS,
   RECEIVE_TAGS,
   TOGGLE_TAG,
-  TOGGLE_MULTISELECT,
-  TOGGLE_PHOTO,
-  TOGGLE_PHOTO_IN_SELECTION,
+  REQUEST_PHOTOS,
   RECEIVE_PHOTOS,
   CLEAR_PHOTOS,
+  TOGGLE_PHOTO,
 } from '../actions/index.js';
 
 function appReducer(state = {
