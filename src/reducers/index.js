@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux';
+
 import {
   SELECT_ALBUM,
   SHOW_ROOT,
