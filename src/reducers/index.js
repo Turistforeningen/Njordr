@@ -7,7 +7,6 @@ import {
   REQUEST_ALBUMS,
   RECEIVE_ALBUMS,
   SEARCH_ALBUM,
-  RECEIVE_SEARCH_RESULT,
   CLEAR_SEARCH,
   REQUEST_TAGS,
   RECEIVE_TAGS,
@@ -99,12 +98,6 @@ function albumReducer(state = {isFetching: false, photos: []}, action) {
         isSearching: true,
         term: action.term,
       });
-    case RECEIVE_SEARCH_RESULT:
-      return Object.assign({}, state, {
-        isSearching: false,
-        hasActiveSearch: true,
-        term: action.term,
-      });
     case CLEAR_SEARCH:
       // TODO: Mega hack
       document.querySelectorAll('input[type="text"]')[0].value = '';
@@ -126,7 +119,6 @@ function albumsReducer(state = {}, action) {
   switch (action.type) {
     case REQUEST_PHOTOS:
     case SEARCH_ALBUM:
-    case RECEIVE_SEARCH_RESULT:
     case CLEAR_SEARCH:
       return Object.assign(
         {},

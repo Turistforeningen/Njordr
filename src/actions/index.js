@@ -72,15 +72,6 @@ export function searchAlbum(album, term) {
   };
 }
 
-export const RECEIVE_SEARCH_RESULT = 'RECEIVE_SEARCH_RESULT';
-export function receiveSearchResult(album, term) {
-  return {
-    type: RECEIVE_SEARCH_RESULT,
-    album,
-    term,
-  };
-}
-
 export const CLEAR_SEARCH = 'CLEAR_SEARCH';
 export function clearSearch(album) {
   return {
