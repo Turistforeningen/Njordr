@@ -15,7 +15,6 @@ import {
   TOGGLE_MULTISELECT,
   TOGGLE_PHOTO,
   TOGGLE_PHOTO_IN_SELECTION,
-  REQUEST_PHOTOS,
   RECEIVE_PHOTOS,
   CLEAR_PHOTOS,
 } from '../actions/index.js';
@@ -84,11 +83,6 @@ function albumReducer(state = {isFetching: false, photos: []}, action) {
         id: action.album,
         isFetching: true,
       });
-    case REQUEST_PHOTOS:
-      return Object.assign({}, state, {
-        id: action.album.id,
-        isFetching: true,
-      });
     case RECEIVE_PHOTOS:
       return Object.assign({}, state, {
         id: action.album.id,
@@ -139,7 +133,6 @@ function albumsReducer(state = {}, action) {
         state,
         {[action.album]: albumReducer(state[action.album], action)}
       );
-    case REQUEST_PHOTOS:
     case RECEIVE_PHOTOS:
     case CLEAR_PHOTOS:
       return Object.assign(
