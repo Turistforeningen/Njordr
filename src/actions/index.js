@@ -100,31 +100,32 @@ export function fetchAlbums() {
   };
 }
 
-export function fetchPhotos(albumId, append = true) {
+export function fetchPhotos(archiveId, append = true) {
   return function(dispatch, getState) { // eslint-disable-line
     const state = getState();
     const tags = appliedTagsSelector(state);
-    const album = currentArchiveSelector(state);
+    const archive = currentArchiveSelector(state);
+    let url = archive.photosUrl;
 
-    const tagsStr = tags.length ? `tags=${tags.join()}` : '';
-    const queryStr = album.term ? `query=${album.term}` : '';
-    let url = !!append && !!album.pagination && !!album.pagination.next ?
-      album.pagination.next : album.photosUrl;
+    if (append === true && archive.pagination && archive.pagination.next) {
+      url = archive.pagination.next;
+    } else if (append === false) {
+      dispatch(clearPhotos(archive));
 
-    if (tagsStr || queryStr) {
-      url = `${url}?${[tagsStr, queryStr].join('&')}`;
+      const tagsStr = tags.length ? `tags=${tags.join()}` : '';
+      const queryStr = archive.term ? `query=${archive.term}` : '';
+
+      if (tagsStr || queryStr) {
+        url = `${url}?${[tagsStr, queryStr].join('&')}`;
+      }
     }
 
-    if (append === false) {
-      dispatch(clearPhotos(album));
-    }
+    dispatch(requestPhotos(archive.id));
 
-    dispatch(requestPhotos(album.id));
-
-    return fetch(url.replace('http:', 'https:')) // TODO: Ensure HTTPS
+    return fetch(url.replace('http:', 'https:')) // TODO: Skadi returns http links only
       .then(response => response.json())
       .then(json => {
-        dispatch(receivePhotos(album, json, append));
+        dispatch(receivePhotos(archive, json, append));
       });
   };
 }
