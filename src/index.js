@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 
+import store from './store.js';
+
 import {
   setCurrentArchive,
   fetchAlbums,
@@ -12,8 +14,6 @@ import {
 } from './actions/index.js';
 
 import {selectedAlbumSelector} from './selectors/index.js';
-
-import store from './store.js';
 
 const DEFAULT_ALBUM = '5001.6xpe2e7cIM88BTcTtyQ9iQ'; // NOTE: Oslo
 // const DEFAULT_ALBUM = '5059.kNjs4vfT0Zncic-MampLmA'; // NOTE: No pagination
