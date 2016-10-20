@@ -42,12 +42,14 @@ class Photos extends Component {
       );
 
     if (album.isEmpty) {
-      return <div className="ui info message">
-        <div className="header">
-          Ingen bilder
+      return (
+        <div className="ui info message">
+          <div className="header">
+            Ingen bilder
+          </div>
+          <p>Dette albumet inneholder ingen bilder.</p>
         </div>
-        <p>Dette albumet inneholder ingen bilder.</p>
-      </div>;
+      );
     }
 
     return (
