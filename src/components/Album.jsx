@@ -1,11 +1,9 @@
 import React, {Component, PropTypes} from 'react';
+import InfiniteScroll from 'redux-infinite-scroll';
 
 import PhotoCard from '../containers/PhotoCard.jsx';
 import SearchContainer from '../containers/SearchContainer.jsx';
 import TagsFilterContainer from '../containers/TagsFilterContainer.jsx';
-
-
-import InfiniteScroll from 'redux-infinite-scroll';
 
 class Photos extends Component {
   loadMore() {
