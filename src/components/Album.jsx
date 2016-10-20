@@ -7,9 +7,9 @@ import TagsFilterContainer from '../containers/TagsFilterContainer.jsx';
 
 class Photos extends Component {
   loadMore() {
-    const {album} = this.props;
+    const {album, fetchPhotos} = this.props;
 
-    this.props.fetchPhotos(album.id);
+    fetchPhotos(album.id);
   }
 
   renderPhotos() {
