@@ -44,6 +44,8 @@ const SelectPhotoButton = ({
 
 class Photo extends Component {
   componentDidMount() {
+    const {copyright} = this.props;
+
     // Setup description popup
     const descriptionPopupTrigger = ReactDOM.findDOMNode(this.refs.description);
     const $descriptionPopupTrigger = $(descriptionPopupTrigger);
@@ -53,6 +55,13 @@ class Photo extends Component {
     const metaPopupTrigger = ReactDOM.findDOMNode(this.refs.meta);
     const $metaPopupTrigger = $(metaPopupTrigger);
     $metaPopupTrigger.popup({hoverable: true, lastResort: true});
+
+    // Setup copyright popup
+    if (copyright) {
+      const copyrightPopupTrigger = ReactDOM.findDOMNode(this.refs.copyright);
+      const $copyrightPopupTrigger = $(copyrightPopupTrigger);
+      $copyrightPopupTrigger.popup();
+    }
   }
 
   render() {
@@ -74,10 +83,16 @@ class Photo extends Component {
     return (
       <div className={`ui ${isSelected ? 'raised ' : ''}card photo`}>
         <div className="ui image">
-          {copyright ?
-            <a className="ui right red ribbon label">
-              <i className="warning icon"></i> Bruksbegrensing
-            </a> : ''}
+          {copyright ? <a className="ui right red ribbon label" ref="copyright">
+            <i className="warning icon"></i> Bruksbegrensing
+          </a> : ''}
+
+          {copyright ? <div className="ui inverted popup top center">
+            <div className="content">
+              {copyright}
+            </div>
+          </div> : ''}
+
           <img src={src} />
         </div>
         <div className="extra content">
