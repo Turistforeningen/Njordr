@@ -4,7 +4,21 @@
     <title>Njordr</title>
   </head>
   <body>
-    <div id="app"></div>
     <script src="/static/bundle.js"></script>
+    <script>
+      window.fotoweb.open(
+        {
+          multiple: false,
+          promotedArchives: [
+            'DNT Oslo og Omegn',
+            'DNT Sentralt',
+            'Blinkskudd'
+          ],
+        },
+        function callback(objects) {
+          console.log('Look what I got!', objects);
+        }
+      );
+    </script>
   </body>
 </html>
