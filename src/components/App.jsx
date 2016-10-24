@@ -53,7 +53,7 @@ class AlbumsDropdown extends Component {
 }
 
 export const App = ({
-  multiselect,
+  isMultiselect,
   albums,
   album,
   showArchive,
@@ -81,7 +81,7 @@ export const App = ({
 );
 
 const mapStateToProps = (state) => ({
-  multiselect: state.app.multiselect,
+  isMultiselect: state.app.isMultiselect,
   currentArchive: state.app.currentArchive,
   album: currentArchiveSelector(state),
   albums: state.albums,

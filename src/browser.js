@@ -10,7 +10,7 @@ import {
   fetchAlbums,
   fetchPhotos,
   fetchTags,
-  toggleMultiselect,
+  setMultiselect,
 } from './actions/index.js';
 
 import {selectedAlbumSelector} from './selectors/index.js';
@@ -28,10 +28,11 @@ if (appContainer) {
     // TODO: Browser started without options, log event
     options = {
       promotedArchives: ['DNT Sentralt'],
+      multiselect: false,
     };
   }
 
-  store.dispatch(toggleMultiselect(true));
+  store.dispatch(setMultiselect(true));
   store.dispatch(fetchTags());
   store.dispatch(fetchAlbums())
     .then(() => {

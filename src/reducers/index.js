@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
 import {
-  TOGGLE_MULTISELECT,
+  SET_MULTISELECT,
   TOGGLE_PHOTO_IN_SELECTION,
   SET_CURRENT_ARCHIVE,
   REQUEST_ALBUMS,
@@ -18,15 +18,15 @@ import {
 } from '../actions/index.js';
 
 function appReducer(state = {
-  multiselect: false,
+  isMultiselect: false,
   selectedPhotos: [],
   allowedDoctypes: ['image'], // NOTE: Add support for `doctype: 'movie'`
 }, action) {
   switch (action.type) {
     case SET_CURRENT_ARCHIVE:
       return Object.assign({}, state, {currentArchive: action.archive});
-    case TOGGLE_MULTISELECT:
-      return Object.assign({}, state, {multiselect: action.multiselect});
+    case SET_MULTISELECT:
+      return Object.assign({}, state, {isMultiselect: action.isMultiselect});
     case TOGGLE_PHOTO_IN_SELECTION: // eslint-disable-line no-case-declarations
       const photoIndex = state.selectedPhotos.findIndex(
         element => element.id === action.photo.id

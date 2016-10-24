@@ -13,6 +13,14 @@ export function setError(err) {
   };
 }
 
+export const SET_MULTISELECT = 'SET_MULTISELECT';
+export function setMultiselect(isMultiselect) {
+  return {
+    type: SET_MULTISELECT,
+    isMultiselect,
+  };
+}
+
 export const SET_CURRENT_ARCHIVE = 'SET_CURRENT_ARCHIVE';
 export function setCurrentArchive(archive) {
   return {type: SET_CURRENT_ARCHIVE, archive};
@@ -168,14 +176,6 @@ export function togglePhotoSelection(photo) {
   return function(dispatch) { // eslint-disable-line
     dispatch(togglePhotoInSelection(photo)); // Adds or removes from selected photos
     dispatch(togglePhoto(photo)); // Changes state for on a photo
-  };
-}
-
-export const TOGGLE_MULTISELECT = 'TOGGLE_MULTISELECT';
-export function toggleMultiselect(multiselect) {
-  return {
-    type: TOGGLE_MULTISELECT,
-    multiselect,
   };
 }
 
