@@ -32,7 +32,7 @@ if (appContainer) {
     };
   }
 
-  store.dispatch(setMultiselect(true));
+  store.dispatch(setMultiselect(options.multiselect));
   store.dispatch(fetchTags());
   store.dispatch(fetchAlbums())
     .then(() => {
