@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
 import moment from 'moment';
+import $ from 'jquery';
+
 $.fn.dimmer = require('semantic-ui-dimmer');
 $.fn.popup = require('semantic-ui-popup');
 $.fn.transition = require('semantic-ui-transition');
