@@ -5,12 +5,16 @@ import Photo from '../components/Photo.jsx';
 import {confirmSelection, togglePhotoSelection} from '../actions/index.js';
 
 const mapStateToProps = (state) => ({
-  app: state.app,
+  allowedDoctypes: state.app.allowedDoctypes,
+  isMultiselect: state.app.isMultiselect,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  selectPhoto: function selectPhoto(photo) {
+  selectPhoto: (photo) => {
     dispatch(togglePhotoSelection(photo));
+  },
+  confirmSelection: (selection) => {
+    dispatch(confirmSelection(selection));
   },
 });
 

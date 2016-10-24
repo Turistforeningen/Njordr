@@ -6,11 +6,24 @@ $.fn.dimmer = require('semantic-ui-dimmer');
 $.fn.popup = require('semantic-ui-popup');
 $.fn.transition = require('semantic-ui-transition');
 
-const SelectPhotoButton = ({photo, isSelected, isAllowed, selectPhoto}) => {
+const SelectPhotoButton = ({
+  photo,
+  isSelected,
+  isAllowed,
+  isMultiselect,
+  selectPhoto,
+  confirmSelection,
+}) => {
   if (!isAllowed) {
     return (
       <div className="ui bottom attached button">
         <i className="add icon"></i> Velg bilde
+      </div>
+    );
+  } else if (!isMultiselect) {
+    return (
+      <div className="ui bottom attached button" onClick={() => { confirmSelection(photo); }}>
+        <i className="check icon"></i> Velg bilde
       </div>
     );
   } else if (isSelected) {
@@ -48,13 +61,14 @@ class Photo extends Component {
       copyright,
       description,
       selectPhoto,
-      confirmSelectedPhotos,
       photo,
-      app,
       isSelected,
+      allowedDoctypes,
+      isMultiselect,
+      confirmSelection,
     } = this.props;
 
-    const isAllowed = app.allowedDoctypes.indexOf(photo.doctype) > -1;
+    const isAllowed = allowedDoctypes.indexOf(photo.doctype) > -1;
 
     return (
       <div className={`ui ${isSelected ? 'raised ' : ''}card photo`}>
@@ -116,6 +130,8 @@ class Photo extends Component {
           isSelected={isSelected}
           isAllowed={isAllowed}
           selectPhoto={selectPhoto}
+          isMultiselect={isMultiselect}
+          confirmSelection={confirmSelection}
         />
       </div>
     );
