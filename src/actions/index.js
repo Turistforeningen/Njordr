@@ -181,9 +181,13 @@ export function togglePhotoSelection(photo) {
 
 export function confirmSelection(selection) {
   return function (dispatch, getState) { // eslint-disable-line func-names
-    const fotowebSelectedEvent = document.createEvent('CustomEvent');
-    fotowebSelectedEvent.initCustomEvent('fotoweb.selected', true, true, selection);
-    window.opener.dispatchEvent(fotowebSelectedEvent);
+    try {
+      const fotowebSelectedEvent = document.createEvent('CustomEvent');
+      fotowebSelectedEvent.initCustomEvent('fotoweb.selected', true, true, selection);
+      window.opener.dispatchEvent(fotowebSelectedEvent);
+    } catch (err) {
+      console.error('Browser was not opened in popup — tried to confirm', selection); // eslint-disable-line no-console, max-len
+    }
   };
 }
 
