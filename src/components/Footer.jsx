@@ -72,7 +72,7 @@ export const Footer = ({selectedPhotos, insertPhotos, removePhoto}) => (
             Sett inn bilder
           </button>
           :
-          <button className="ui primary button" onClick={() => { insertPhotos(); }}>
+          <button className="ui primary button" onClick={() => { insertPhotos(selectedPhotos); }}>
             Sett inn {selectedPhotos.length} bilder
           </button>
         }
@@ -86,8 +86,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  insertPhotos: function insertPhotos() {
-    dispatch(confirmSelection());
+  insertPhotos: function insertPhotos(selection) {
+    dispatch(confirmSelection(selection));
   },
   removePhoto: function removePhoto(photo) {
     dispatch(togglePhotoSelection(photo));

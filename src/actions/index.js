@@ -179,12 +179,10 @@ export function togglePhotoSelection(photo) {
   };
 }
 
-export function confirmSelection() {
+export function confirmSelection(selection) {
   return function (dispatch, getState) { // eslint-disable-line func-names
-    const {app} = getState();
-
     const fotowebSelectedEvent = document.createEvent('CustomEvent');
-    fotowebSelectedEvent.initCustomEvent('fotoweb.selected', true, true, app.selectedPhotos);
+    fotowebSelectedEvent.initCustomEvent('fotoweb.selected', true, true, selection);
     window.opener.dispatchEvent(fotowebSelectedEvent);
   };
 }
