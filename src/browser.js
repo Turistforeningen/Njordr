@@ -40,6 +40,7 @@ if (appContainer) {
       const defaultAlbum = Object.values(state.albums).find(album => (
         album.name === options.promotedArchives[0])
       );
+
       store.dispatch(setCurrentArchive(defaultAlbum.id));
     });
 
