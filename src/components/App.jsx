@@ -76,7 +76,7 @@ export const App = ({
       </div>
     </header>
     {app && app.currentArchive ? <AlbumContainer /> : <ArchiveContainer />}
-    <Footer />
+    {isMultiselect ? <Footer /> : ''}
   </div>
 );
 
