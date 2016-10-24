@@ -13,14 +13,9 @@ export function setError(err) {
   };
 }
 
-export const SELECT_ALBUM = 'SELECT_ALBUM';
-export function selectAlbum(album) {
-  return {type: SELECT_ALBUM, album};
-}
-
-export const SHOW_ROOT = 'SHOW_ROOT';
-export function showRoot() {
-  return {type: SHOW_ROOT};
+export const SET_CURRENT_ARCHIVE = 'SET_CURRENT_ARCHIVE';
+export function setCurrentArchive(archive) {
+  return {type: SET_CURRENT_ARCHIVE, archive};
 }
 
 export const REQUEST_ALBUMS = 'REQUEST_ALBUMS';
@@ -184,9 +179,14 @@ export function toggleMultiselect(multiselect) {
   };
 }
 
-export function confirmSelectedPhotos() {
-  // TODO: Implement this
-  console.warn('Not implemented yet.'); // eslint-disable-line no-console
+export function confirmSelection() {
+  return function (dispatch, getState) { // eslint-disable-line func-names
+    const {app} = getState();
+
+    const fotowebSelectedEvent = document.createEvent('CustomEvent');
+    fotowebSelectedEvent.initCustomEvent('fotoweb.selected', true, true, app.selectedPhotos);
+    window.opener.dispatchEvent(fotowebSelectedEvent);
+  };
 }
 
 export function fetchTags() {

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import {selectAlbum} from '../actions/index.js';
+import {setCurrentArchive} from '../actions/index.js';
 
 const AlbumCard = ({id, name, posterImage, handleAlbumClick}) => (
   <a className="ui card" onClick={(e) => { handleAlbumClick(id); }}>
@@ -28,8 +28,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleAlbumClick: (album) => {
-    dispatch(selectAlbum(album));
+  handleAlbumClick: (archive) => {
+    dispatch(setCurrentArchive(archive));
   },
 });
 

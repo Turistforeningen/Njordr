@@ -2,13 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Archive from '../components/Archive.jsx';
-import {selectAlbum, fetchAlbum} from '../actions/index.js';
+import {setCurrentArchive, fetchAlbum} from '../actions/index.js';
 
 const mapStateToProps = (state) => (Object.assign({}, state));
 
 const mapDispatchToProps = (dispatch) => ({
-  selectAlbum: (id) => {
-    dispatch(selectAlbum(id));
+  setCurrentArchive: (id) => {
+    dispatch(setCurrentArchive(id));
     dispatch(fetchAlbum(id));
   },
 });

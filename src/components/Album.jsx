@@ -1,17 +1,15 @@
 import React, {Component, PropTypes} from 'react';
+import InfiniteScroll from 'redux-infinite-scroll';
 
 import PhotoCard from '../containers/PhotoCard.jsx';
 import SearchContainer from '../containers/SearchContainer.jsx';
 import TagsFilterContainer from '../containers/TagsFilterContainer.jsx';
 
-
-import InfiniteScroll from 'redux-infinite-scroll';
-
 class Photos extends Component {
   loadMore() {
-    const {album} = this.props;
+    const {album, fetchPhotos} = this.props;
 
-    this.props.fetchPhotos(album.id);
+    fetchPhotos(album.id);
   }
 
   renderPhotos() {
@@ -44,12 +42,14 @@ class Photos extends Component {
       );
 
     if (album.isEmpty) {
-      return <div className="ui info message">
-        <div className="header">
-          Ingen bilder
+      return (
+        <div className="ui info message">
+          <div className="header">
+            Ingen bilder
+          </div>
+          <p>Dette albumet inneholder ingen bilder.</p>
         </div>
-        <p>Dette albumet inneholder ingen bilder.</p>
-      </div>;
+      );
     }
 
     return (

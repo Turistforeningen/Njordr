@@ -68,9 +68,13 @@ export const Footer = ({selectedPhotos, insertPhotos, removePhoto}) => (
         <button className="ui default button">Avbryt</button>
         {
           selectedPhotos.length === 0 ?
-          <button className="ui primary disabled button">Sett inn bilder</button>
+          <button className="ui primary disabled button">
+            Sett inn bilder
+          </button>
           :
-          <button className="ui primary button">Sett inn {selectedPhotos.length} bilder</button>
+          <button className="ui primary button" onClick={() => { insertPhotos(); }}>
+            Sett inn {selectedPhotos.length} bilder
+          </button>
         }
       </div>
     </div>
