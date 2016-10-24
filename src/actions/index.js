@@ -179,9 +179,14 @@ export function toggleMultiselect(multiselect) {
   };
 }
 
-export function confirmSelectedPhotos() {
-  // TODO: Implement this
-  console.warn('Not implemented yet.'); // eslint-disable-line no-console
+export function confirmSelection() {
+  return function (dispatch, getState) { // eslint-disable-line func-names
+    const {app} = getState();
+
+    const fotowebSelectedEvent = document.createEvent('CustomEvent');
+    fotowebSelectedEvent.initCustomEvent('fotoweb.selected', true, true, app.selectedPhotos);
+    window.opener.dispatchEvent(fotowebSelectedEvent);
+  };
 }
 
 export function fetchTags() {
