@@ -13,6 +13,14 @@ export function setError(err) {
   };
 }
 
+export const SET_API_URL = 'SET_API_URL';
+export function setApiUrl(url) {
+  return {
+    type: SET_API_URL,
+    url,
+  };
+}
+
 export const SET_MULTISELECT = 'SET_MULTISELECT';
 export function setMultiselect(isMultiselect) {
   return {

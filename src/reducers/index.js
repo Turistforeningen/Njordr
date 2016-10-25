@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 
 import {
+  SET_API_URL,
   SET_MULTISELECT,
   TOGGLE_PHOTO_IN_SELECTION,
   SET_CURRENT_ARCHIVE,
@@ -23,6 +24,8 @@ function appReducer(state = {
   allowedDoctypes: ['image'], // NOTE: Add support for `doctype: 'movie'`
 }, action) {
   switch (action.type) {
+    case SET_API_URL:
+      return Object.assign({}, state, {apiUrl: action.url});
     case SET_CURRENT_ARCHIVE:
       return Object.assign({}, state, {currentArchive: action.archive});
     case SET_MULTISELECT:
