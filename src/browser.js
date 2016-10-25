@@ -19,33 +19,32 @@ import App from './components/App.jsx';
 
 const appContainer = document.getElementById('app');
 
-if (appContainer) {
-  let options;
+let options;
 
-  try {
-    options = JSON.parse(window.name);
-  } catch (err) {
-    // TODO: Browser started without options, log event
-    options = {
-      promotedArchives: ['DNT Sentralt'],
-      multiselect: false,
-    };
-  }
-
-  store.dispatch(setMultiselect(options.multiselect));
-  store.dispatch(fetchTags());
-  store.dispatch(fetchAlbums())
-    .then(() => {
-      const state = store.getState();
-      const defaultAlbum = Object.values(state.albums).find(album => (
-        album.name === options.promotedArchives[0])
-      );
-
-      store.dispatch(setCurrentArchive(defaultAlbum.id));
-    });
-
-  ReactDOM.render(
-    React.createElement(Provider, {store}, React.createElement(App)),
-    document.getElementById('app')
-  );
+try {
+  options = JSON.parse(window.name);
+} catch (err) {
+  // TODO: Browser started without options, log event
+  options = {
+    promotedArchives: ['DNT Sentralt'],
+    multiselect: false,
+  };
 }
+
+store.dispatch(setMultiselect(options.multiselect));
+
+store.dispatch(fetchTags());
+store.dispatch(fetchAlbums())
+  .then(() => {
+    const state = store.getState();
+    const defaultAlbum = Object.values(state.albums).find(album => (
+      album.name === options.promotedArchives[0])
+    );
+
+    store.dispatch(setCurrentArchive(defaultAlbum.id));
+  });
+
+ReactDOM.render(
+  React.createElement(Provider, {store}, React.createElement(App)),
+  document.getElementById('app')
+);
