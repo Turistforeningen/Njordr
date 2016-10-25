@@ -11,6 +11,7 @@ import {
   fetchPhotos,
   fetchTags,
   setMultiselect,
+  setApiUrl,
 } from './actions/index.js';
 
 import {selectedAlbumSelector} from './selectors/index.js';
@@ -32,6 +33,7 @@ try {
 }
 
 store.dispatch(setMultiselect(options.multiselect));
+store.dispatch(setApiUrl(options.apiUrl));
 
 store.dispatch(fetchTags());
 store.dispatch(fetchAlbums())

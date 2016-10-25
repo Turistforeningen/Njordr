@@ -100,9 +100,12 @@ export function clearPhotos(album) {
 }
 
 export function fetchAlbums() {
-  return function(dispatch) { // eslint-disable-line
+  return function(dispatch, getState) { // eslint-disable-line
+    const {app} = getState();
+
     dispatch(requestAlbums());
-    return fetch('https://skadi.app.dnt.no/v1/albums')
+
+    return fetch(`${app.apiUrl}/albums`)
       .then(response => response.json())
       .then(
         json => dispatch(receiveAlbums(json)),
@@ -200,9 +203,12 @@ export function confirmSelection(selection) {
 }
 
 export function fetchTags() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const {app} = getState();
+
     dispatch(requestAlbums());
-    return fetch('https://skadi.app.dnt.no/v1/tags')
+
+    return fetch(`${app.apiUrl}/tags`)
       .then(response => response.json())
       .then(json => dispatch(receiveTags(json)));
   };
