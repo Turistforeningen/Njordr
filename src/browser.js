@@ -27,7 +27,6 @@ try {
 } catch (err) {
   // TODO: Browser started without options, log event
   options = {
-    promotedArchives: ['DNT Sentralt'],
     multiselect: false,
   };
 }
