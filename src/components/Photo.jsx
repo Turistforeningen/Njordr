@@ -99,8 +99,8 @@ class Photo extends Component {
           <a className="left floated info" ref="meta">
             <i className="info icon"></i> Info
           </a>
-          <div className="ui popup top center">
-            <div className="header">{id.length > 15 ? `${id.substring(0, 12)}...` : id}</div>
+          <div className="ui popup top center" style={{width: '250px'}}>
+            <div className="header">{id.length > 30 ? `${id.substring(0, 27)}...` : id}</div>
             <div className="content">
               <div className="ui list">
                 <div className="item">
