@@ -51,7 +51,9 @@ store.dispatch(fetchAlbums())
   })
   .then((state) => {
     const promotedArchives = options.promotedArchives.map((name) => (
-      Object.values(state.albums).find((archive) => archive.name === name).id
+      Object.values(state.albums).find((archive) => (
+        new RegExp(archive.name, 'i').test(name)
+      )).id
     ));
 
     store.dispatch(setPromotedArchives(promotedArchives));
