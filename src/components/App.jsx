@@ -47,10 +47,6 @@ class AlbumsDropdown extends Component {
           </div>
           {(Object.keys(albums).map((key) => (
             <div key={key} className="item" onClick={() => { handleSelectAlbum(albums[key]); }}>
-              <div
-                className="ui empty circular label"
-                style={{backgroundColor: albums[key].color}}
-              ></div>
               {albums[key].name}
             </div>
           )))}
