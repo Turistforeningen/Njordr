@@ -32,7 +32,7 @@ class AlbumsDropdown extends Component {
             <i className="star icon"></i> Mine arkiver
           </div>
           {(promotedArchives.map((key) => (
-            <div key={key} className="item">
+            <div key={key} className="item" onClick={() => { handleSelectAlbum(albums[key]); }}>
               {albums[key].name}
             </div>
           )))}
