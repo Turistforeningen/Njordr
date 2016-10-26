@@ -52,11 +52,19 @@ store.dispatch(fetchAlbums())
     return state;
   })
   .then((state) => {
-    const promotedArchives = options.promotedArchives.map((name) => (
-      Object.values(state.albums).find((archive) => (
+    const promotedArchives = options.promotedArchives.reduce((archives, name) => {
+      const hiddenArchive = Object.values(state.albums).find((archive) => (
         new RegExp(archive.name, 'i').test(name)
-      )).id
-    ));
+      ));
+
+      if (hiddenArchive) {
+        archives.push(hiddenArchive.id);
+      } else {
+        // NOTE: `Promoted archive "${name}" was not found in archives`
+      }
+
+      return archives;
+    }, []);
 
     store.dispatch(setPromotedArchives(promotedArchives));
 
