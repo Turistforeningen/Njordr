@@ -22,20 +22,28 @@ class AlbumsDropdown extends Component {
   }
 
   render() {
-    const {album, albums, handleSelectAlbum} = this.props;
+    const {album, albums, promotedArchives = [], handleSelectAlbum} = this.props;
 
     return (
       <div className="ui dropdown item" ref="dropdown">
         {album ? album.name : 'Velg arkiv'} <i className="dropdown icon"></i>
         <div className="menu">
+          <div className="header">
+            <i className="star icon"></i> Mine arkiver
+          </div>
+          {(promotedArchives.map((key) => (
+            <div key={key} className="item">
+              {albums[key].name}
+            </div>
+          )))}
+          <div className="divider"></div>
           <div className="ui left search icon input">
             <i className="search icon"></i>
             <input type="text" name="search" placeholder="Finn arkiv..." />
           </div>
           <div className="divider"></div>
           <div className="header">
-            <i className="book icon"></i>
-            Velg arkiv
+            <i className="book icon"></i> Alle arkiver
           </div>
           {(Object.keys(albums).map((key) => (
             <div key={key} className="item" onClick={() => { handleSelectAlbum(albums[key]); }}>
