@@ -5,6 +5,8 @@ import {
   SET_MULTISELECT,
   TOGGLE_PHOTO_IN_SELECTION,
   SET_CURRENT_ARCHIVE,
+  SET_PROMOTED_ARCHIVES,
+  REMOVE_ARCHIVES,
   REQUEST_ALBUMS,
   RECEIVE_ALBUMS,
   SEARCH_ALBUM,
@@ -28,6 +30,8 @@ function appReducer(state = {
       return Object.assign({}, state, {apiUrl: action.url});
     case SET_CURRENT_ARCHIVE:
       return Object.assign({}, state, {currentArchive: action.archive});
+    case SET_PROMOTED_ARCHIVES:
+      return Object.assign({}, state, {promotedArchives: action.archives});
     case SET_MULTISELECT:
       return Object.assign({}, state, {isMultiselect: action.isMultiselect});
     case TOGGLE_PHOTO_IN_SELECTION: // eslint-disable-line no-case-declarations
@@ -119,6 +123,16 @@ function albumReducer(state = {isFetching: false, photos: []}, action) {
 
 function albumsReducer(state = {}, action) {
   switch (action.type) {
+    case REMOVE_ARCHIVES:
+      if (action.archives && action.archives.length) {
+        return Object.keys(state).reduce((archives, archive) => {
+          if (action.archives.indexOf(archive) === -1) {
+            archives[archive] = state[archive];
+          }
+          return archives;
+        }, {});
+      }
+      return state;
     case REQUEST_PHOTOS:
     case SEARCH_ALBUM:
     case CLEAR_SEARCH:

@@ -34,6 +34,16 @@ export function setCurrentArchive(archive) {
   return {type: SET_CURRENT_ARCHIVE, archive};
 }
 
+export const REMOVE_ARCHIVES = 'REMOVE_ARCHIVES';
+export function removeArchives(archives) {
+  return {type: REMOVE_ARCHIVES, archives};
+}
+
+export const SET_PROMOTED_ARCHIVES = 'SET_PROMOTED_ARCHIVES';
+export function setPromotedArchives(archives) {
+  return {type: SET_PROMOTED_ARCHIVES, archives};
+}
+
 export const REQUEST_ALBUMS = 'REQUEST_ALBUMS';
 export function requestAlbums() {
   return {type: REQUEST_ALBUMS};
