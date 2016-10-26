@@ -62,6 +62,8 @@ export const App = ({
   album,
   showArchive,
   handleSelectAlbum,
+  hiddenArchives,
+  promotedArchives,
   app,
 }) => (
   <div>
@@ -74,6 +76,7 @@ export const App = ({
             album={album}
             albums={albums}
             handleSelectAlbum={handleSelectAlbum}
+            promotedArchives={promotedArchives}
           /> :
           <div className="item">Henter arkiver...</div>
         }
@@ -89,6 +92,8 @@ const mapStateToProps = (state) => ({
   currentArchive: state.app.currentArchive,
   album: currentArchiveSelector(state),
   albums: state.albums,
+  hiddenArchives: state.app.hiddenArchives,
+  promotedArchives: state.app.promotedArchives,
   app: state.app,
 });
 
