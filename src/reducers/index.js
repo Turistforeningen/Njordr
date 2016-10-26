@@ -24,6 +24,7 @@ function appReducer(state = {
   isMultiselect: false,
   selectedPhotos: [],
   allowedDoctypes: ['image'], // NOTE: Add support for `doctype: 'movie'`
+  promotedArchives: [],
 }, action) {
   switch (action.type) {
     case SET_API_URL:

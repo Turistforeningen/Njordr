@@ -22,7 +22,7 @@ class AlbumsDropdown extends Component {
   }
 
   render() {
-    const {album, albums, promotedArchives = [], handleSelectAlbum} = this.props;
+    const {album, albums, promotedArchives, handleSelectAlbum} = this.props;
 
     return (
       <div className="ui dropdown item" ref="dropdown">
