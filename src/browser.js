@@ -41,9 +41,11 @@ store.dispatch(fetchAlbums())
   .then(() => {
     const state = store.getState();
 
-    const hiddenArchives = Object.values(state.albums).filter(album => (
-      options.hiddenArchives.indexOf(album.name) !== -1)
-    ).map(archive => archive.id);
+    const hiddenArchives = Object.values(state.albums).filter((archive) => (
+      options.hiddenArchives.find((name) => (
+        new RegExp(archive.name, 'i').test(name)
+      ))
+    )).map(archive => archive.id);
 
     store.dispatch(removeArchives(hiddenArchives));
 
