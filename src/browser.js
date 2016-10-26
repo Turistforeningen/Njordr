@@ -6,12 +6,14 @@ import {Provider} from 'react-redux';
 import store from './store.js';
 
 import {
-  setCurrentArchive,
   fetchAlbums,
   fetchPhotos,
   fetchTags,
-  setMultiselect,
   setApiUrl,
+  setCurrentArchive,
+  removeArchives,
+  setMultiselect,
+  setPromotedArchives,
 } from './actions/index.js';
 
 import {selectedAlbumSelector} from './selectors/index.js';
@@ -38,6 +40,25 @@ store.dispatch(fetchTags());
 store.dispatch(fetchAlbums())
   .then(() => {
     const state = store.getState();
+
+    const hiddenArchives = Object.values(state.albums).filter(album => (
+      options.hiddenArchives.indexOf(album.name) !== -1)
+    ).map(archive => archive.id);
+
+    store.dispatch(removeArchives(hiddenArchives));
+
+    return state;
+  })
+  .then((state) => {
+    const promotedArchives = options.promotedArchives.map((name) => (
+      Object.values(state.albums).find((archive) => archive.name === name).id
+    ));
+
+    store.dispatch(setPromotedArchives(promotedArchives));
+
+    return state;
+  })
+  .then((state) => {
     const defaultAlbum = Object.values(state.albums).find(album => (
       album.name === options.promotedArchives[0])
     );
