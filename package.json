@@ -9,8 +9,7 @@
     "lint:watch": "esw --ext .js,.jsx --color --watch src/",
     "nsp": "nsp check",
     "test": "mocha --require ignore-styles test/setup.js test/**/*-test.js",
-    "test:watch": "mocha --require ignore-styles --watch --watch-extensions jsx test/setup.js test/**/*-test.js",
-    "watch": "webpack --watch"
+    "test:watch": "mocha --require ignore-styles --watch --watch-extensions jsx test/setup.js test/**/*-test.js"
   },
   "repository": {
     "type": "git",
