@@ -8,15 +8,13 @@
     <script>
       window.fotoweb.open(
         {
-          multiple: false,
-          promotedArchives: [
-            'DNT Oslo og Omegn',
-            'DNT Sentralt',
-            'Blinkskudd'
-          ],
+          multiselect: false,
+          apiUrl: 'https://skadi.app.dnt.no/v1',
+          hiddenArchives: ['Alle bilder', 'Alle mine bilder'],
+          promotedArchives: ['DNT Oslo og Omegn', 'DNT sentralt', 'Blinkskudd'],
         },
-        function callback(objects) {
-          console.log('Look what I got!', objects);
+        function callback(selectedImage) {
+          console.log('Look what I got!', selectedImage);
         }
       );
     </script>
