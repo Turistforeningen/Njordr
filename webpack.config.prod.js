@@ -31,6 +31,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'browser.html',
       template: './src/browser.html',
+      chunks: ['browser'],
     }),
-  ]
+  ],
 };

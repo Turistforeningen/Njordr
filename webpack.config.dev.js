@@ -18,9 +18,6 @@ module.exports = {
     filename: '[name].js',
     publicPath: '/static/',
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
   module: {
     loaders: [
       {
@@ -35,4 +32,12 @@ module.exports = {
       {test: /\.scss$/, loaders: ['style', 'css', 'sass']},
     ],
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      filename: 'browser.html',
+      template: './src/browser.html',
+      chunks: ['browser'],
+    }),
+  ],
 };
