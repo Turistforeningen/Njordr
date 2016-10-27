@@ -5,7 +5,7 @@ import $ from 'jquery';
 $.fn.dropdown = require('semantic-ui-dropdown');
 
 import AlbumContainer from '../containers/AlbumContainer.jsx';
-import ArchiveContainer from '../containers/ArchiveContainer.jsx';
+import ArchivesContainer from '../containers/ArchivesContainer.jsx';
 import {fetchPhotos, setCurrentArchive} from '../actions/index.js';
 import {currentArchiveSelector} from '../selectors/index.js';
 import Footer from '../components/Footer.jsx';
@@ -82,7 +82,7 @@ export const App = ({
         }
       </div>
     </header>
-    {app && app.currentArchive ? <AlbumContainer /> : <ArchiveContainer />}
+    {app && app.currentArchive ? <AlbumContainer /> : <ArchivesContainer />}
     {isMultiselect ? <Footer /> : ''}
   </div>
 );
