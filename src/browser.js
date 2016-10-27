@@ -42,41 +42,47 @@ store.dispatch(fetchAlbums())
   .then(() => {
     const state = store.getState();
 
-    const hiddenArchives = Object.values(state.albums).filter((archive) => (
-      options.hiddenArchives.find((name) => (
-        new RegExp(archive.name, 'i').test(name)
-      ))
-    )).map(archive => archive.id);
+    if (options.hiddenArchives && options.hiddenArchives.length) {
+      const hiddenArchives = Object.values(state.albums).filter((archive) => (
+        options.hiddenArchives.find((name) => (
+          new RegExp(archive.name, 'i').test(name)
+        ))
+      )).map(archive => archive.id);
 
-    store.dispatch(removeArchives(hiddenArchives));
-
-    return state;
-  })
-  .then((state) => {
-    const promotedArchives = options.promotedArchives.reduce((archives, name) => {
-      const hiddenArchive = Object.values(state.albums).find((archive) => (
-        new RegExp(archive.name, 'i').test(name)
-      ));
-
-      if (hiddenArchive) {
-        archives.push(hiddenArchive.id);
-      } else {
-        // NOTE: `Promoted archive "${name}" was not found in archives`
-      }
-
-      return archives;
-    }, []);
-
-    store.dispatch(setPromotedArchives(promotedArchives));
+      store.dispatch(removeArchives(hiddenArchives));
+    }
 
     return state;
   })
   .then((state) => {
-    const defaultAlbum = Object.values(state.albums).find(album => (
-      album.name === options.promotedArchives[0])
-    );
+    if (options.promotedArchives && options.promotedArchives.length) {
+      const promotedArchives = options.promotedArchives.reduce((archives, name) => {
+        const hiddenArchive = Object.values(state.albums).find((archive) => (
+          new RegExp(archive.name, 'i').test(name)
+        ));
 
-    store.dispatch(setCurrentArchive(defaultAlbum.id));
+        if (hiddenArchive) {
+          archives.push(hiddenArchive.id);
+        } else {
+          // NOTE: `Promoted archive "${name}" was not found in archives`
+        }
+
+        return archives;
+      }, []);
+
+      store.dispatch(setPromotedArchives(promotedArchives));
+    }
+
+    return state;
+  })
+  .then((state) => {
+    if (options.promotedArchives && options.promotedArchives.length) {
+      const defaultAlbum = Object.values(state.albums).find(album => (
+        album.name === options.promotedArchives[0])
+      );
+
+      store.dispatch(setCurrentArchive(defaultAlbum.id));
+    }
   });
 
 ReactDOM.render(
