@@ -67,41 +67,44 @@ class Photos extends Component {
   }
 }
 
-const Album = ({album, photos, isFetching, fetchPhotos, clearSearch}) => {
-  const activeSearchFilterMessage = <div>
-    <div className="ui info message">
-      <div className="content">
-        <p>
-          Viser søkeresultat for <strong>{album.term}</strong>.
-          {' '}
-          <a onClick={() => { clearSearch(album.id); } }>Vis alle</a>
-        </p>
-      </div>
-    </div>
-  </div>;
-
-  return (
-    <div className="ui grid album">
-      <div className="four wide column">
-        <div className="ui fluid vertical menu">
-          <div className="item">
-            <SearchContainer />
-          </div>
-          <TagsFilterContainer />
+class Album extends Component {
+  render() {
+    const {album, photos, isFetching, fetchPhotos, clearSearch} = this.props;
+    const activeSearchFilterMessage = <div>
+      <div className="ui info message">
+        <div className="content">
+          <p>
+            Viser søkeresultat for <strong>{album.term}</strong>.
+            {' '}
+            <a onClick={() => { clearSearch(album.id); } }>Vis alle</a>
+          </p>
         </div>
       </div>
-      <div className="twelve wide column">
-        {album.term && !album.isFetching ? activeSearchFilterMessage : ''}
-        <Photos
-          album={album}
-          fetchPhotos={fetchPhotos}
-          isFetching={isFetching}
-          photos={photos}
-        />
+    </div>;
+
+    return (
+      <div className="ui grid album">
+        <div className="four wide column">
+          <div className="ui fluid vertical menu" ref="filters">
+            <div className="item">
+              <SearchContainer />
+            </div>
+            <TagsFilterContainer />
+          </div>
+        </div>
+        <div className="twelve wide column">
+          {album.term && !album.isFetching ? activeSearchFilterMessage : ''}
+          <Photos
+            album={album}
+            fetchPhotos={fetchPhotos}
+            isFetching={isFetching}
+            photos={photos}
+          />
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 Album.propTypes = {
   album: PropTypes.shape({
