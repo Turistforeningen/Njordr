@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 
 import AlbumContainer from '../containers/AlbumContainer.jsx';
 import ArchivesContainer from '../containers/ArchivesContainer.jsx';
-import {currentArchiveSelector} from '../selectors/index.js';
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
 
@@ -23,7 +22,7 @@ export const App = ({
 );
 
 const mapStateToProps = (state) => ({
-  currentArchive: currentArchiveSelector(state),
+  currentArchive: state.app.currentArchive,
   isMultiselect: state.app.isMultiselect,
 });
 
