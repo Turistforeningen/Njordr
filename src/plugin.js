@@ -10,14 +10,19 @@ const fotoweb = {
       'width=940,height=660,resizable=yes,dialog=yes,modal=yes,scrollbars=yes,top=100,left=200'
     );
 
-    window.addEventListener('fotoweb.selected', (e) => {
+    function onFotowebSelected(e) {
+      window.removeEventListener('fotoweb.selected', onFotowebSelected);
       callback(e.detail);
       popup.close();
-    }, false);
+    }
 
-    window.addEventListener('fotoweb.cancelled', (e) => {
+    function onFotowebCancelled(e) {
+      window.removeEventListener('fotoweb.cancelled', onFotowebCancelled);
       popup.close();
-    }, false);
+    }
+
+    window.addEventListener('fotoweb.selected', onFotowebSelected, false);
+    window.addEventListener('fotoweb.cancelled', onFotowebCancelled, false);
   },
 };
 
