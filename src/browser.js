@@ -27,7 +27,7 @@ try {
   options = JSON.parse(window.name);
 } catch (err) {
   // TODO: Browser started without options, log event
-  console.error('FotoWeb Browser started without options');
+  console.error('FotoWeb Browser started without options'); // eslint-disable-line no-console
 }
 
 if (typeof options.apiUrl !== 'string') {
