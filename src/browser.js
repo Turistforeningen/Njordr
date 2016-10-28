@@ -28,9 +28,6 @@ try {
 } catch (err) {
   // TODO: Browser started without options, log event
   console.error('FotoWeb Browser started without options');
-  options = {
-    multiselect: false,
-  };
 }
 
 if (typeof options.apiUrl !== 'string') {
