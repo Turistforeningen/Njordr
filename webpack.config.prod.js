@@ -33,5 +33,6 @@ module.exports = {
       template: './src/browser.html',
       chunks: ['browser'],
     }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb|nn/),
   ],
 };
