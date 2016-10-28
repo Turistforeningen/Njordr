@@ -17,6 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   clearSearch: (album) => {
     dispatch(clearSearch(album));
+    dispatch(fetchPhotos(album, false));
   },
 });
 
