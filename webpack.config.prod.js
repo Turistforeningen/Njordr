@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   eslint: {configFile: '.eslintrc'},
-  devtool: 'eval',
+  devtool: 'source-map',
   entry: {
     plugin: './src/plugin',
     browser: './src/browser',
