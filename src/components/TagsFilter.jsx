@@ -2,7 +2,7 @@ import React from 'react';
 
 const TagsFilter = ({album, tags, toggleTag}) => (
   <div className="item">
-    Tags
+    Tagger
     <div className="menu">
       {tags.map(tag => (
         <a className="item" key={tag.key} onClick={() => {
