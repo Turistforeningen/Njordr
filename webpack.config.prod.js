@@ -34,5 +34,7 @@ module.exports = {
       chunks: ['browser'],
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb|nn/),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
   ],
 };
