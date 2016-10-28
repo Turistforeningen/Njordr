@@ -110,7 +110,7 @@ function albumReducer(state = {isFetching: false, photos: []}, action) {
       });
     case CLEAR_SEARCH:
       // TODO: Mega hack
-      document.querySelectorAll('input[type="text"]')[0].value = '';
+      document.querySelectorAll('input[name="archive-search"]')[0].value = '';
       return Object.assign({}, state, {
         term: undefined,
         hasActiveSearch: false,

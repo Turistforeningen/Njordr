@@ -5,6 +5,7 @@ const Search = ({album, handleKeyPress}) => (
     <input
       type="text"
       placeholder="Søk i arkiv"
+      name="archive-search"
       onKeyPress={(e) => { handleKeyPress(album, e); }}
     />
     <i className="search icon"></i>
