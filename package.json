@@ -4,7 +4,7 @@
   "description": "GUI browser for Skadi FotoWeb adapter",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && NODE_ENV=production webpack -p --config ./webpack.config.prod.js",
+    "build": "rm -rf dist && NODE_ENV=production webpack -p --progress --config ./webpack.config.prod.js",
     "lint": "eslint --ext .js,.jsx src/",
     "lint:watch": "esw --ext .js,.jsx --color --watch src/",
     "nsp": "nsp check",
