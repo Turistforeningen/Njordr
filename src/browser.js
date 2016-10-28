@@ -27,6 +27,7 @@ try {
   options = JSON.parse(window.name);
 } catch (err) {
   // TODO: Browser started without options, log event
+  console.error('FotoWeb Browser started without options');
   options = {
     multiselect: false,
   };
