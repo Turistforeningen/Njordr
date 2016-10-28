@@ -26,7 +26,8 @@ try {
   const scripts = document.getElementsByTagName('script');
   fotoweb.path = scripts[scripts.length - 1].src.replace('/plugin.js', '');
 } catch (err) {
-  // NOTE: Could not find path to plugin
+  // eslint-disable-next-line no-console
+  console.error('Could not find path to FotoWeb plugin – is it loaded in a script tag?');
 }
 
 window.fotoweb = fotoweb;
