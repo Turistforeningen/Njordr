@@ -6,16 +6,6 @@ a {
   cursor: pointer;
 }
 
-.album {
-  .photo {
-    .description {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-}
-
 .bottom.menu {
   padding: 15px;
 }
