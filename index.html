@@ -4,19 +4,29 @@
     <title>Njordr</title>
   </head>
   <body>
+    <input type="checkbox" id="multiselect"> Multiselect
+    <br>
+    <button id="fotoweb">Browse FotoWeb</button>
     <script src="/static/plugin.js"></script>
     <script>
-      window.fotoweb.open(
-        {
-          multiselect: false,
-          apiUrl: 'https://skadi.app.dnt.no/v1',
-          hiddenArchives: ['Alle bilder', 'Alle mine bilder'],
-          promotedArchives: ['DNT Oslo og Omegn', 'DNT sentralt', 'Blinkskudd'],
-        },
-        function callback(selectedImage) {
-          console.log('Look what I got!', selectedImage);
-        }
-      );
+      var fotowebCheckbox = document.getElementById('multiselect');
+      var fotowebButton = document.getElementById('fotoweb');
+
+      function openPopup() {
+        window.fotoweb.open(
+          {
+            multiselect: fotowebCheckbox.checked,
+            apiUrl: 'https://skadi.app.dnt.no/v1',
+            hiddenArchives: ['Alle bilder', 'Alle mine bilder'],
+            promotedArchives: ['DNT Oslo og Omegn', 'DNT sentralt', 'Blinkskudd'],
+          },
+          function callback(selected) {
+            console.log('Look what I got!', selected);
+          }
+        );
+      }
+
+      fotowebButton.onclick = openPopup;
     </script>
   </body>
 </html>
