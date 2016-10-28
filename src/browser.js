@@ -21,8 +21,6 @@ import {selectedAlbumSelector} from './selectors/index.js';
 
 import App from './components/App.jsx';
 
-const appContainer = document.getElementById('app');
-
 let options;
 
 try {
