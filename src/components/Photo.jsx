@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import moment from 'moment';
 import $ from 'jquery';
 
-$.fn.dimmer = require('semantic-ui-dimmer');
 $.fn.popup = require('semantic-ui-popup');
 $.fn.transition = require('semantic-ui-transition');
 
