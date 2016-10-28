@@ -57,12 +57,12 @@ store.dispatch(fetchAlbums())
   .then((state) => {
     if (options.promotedArchives && options.promotedArchives.length) {
       const promotedArchives = options.promotedArchives.reduce((archives, name) => {
-        const hiddenArchive = Object.values(state.albums).find((archive) => (
+        const promotedArchive = Object.values(state.albums).find((archive) => (
           new RegExp(archive.name, 'i').test(name)
         ));
 
-        if (hiddenArchive) {
-          archives.push(hiddenArchive.id);
+        if (promotedArchive) {
+          archives.push(promotedArchive.id);
         } else {
           // NOTE: `Promoted archive "${name}" was not found in archives`
         }
