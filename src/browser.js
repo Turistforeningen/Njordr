@@ -33,6 +33,10 @@ try {
   };
 }
 
+if (typeof options.apiUrl !== 'string') {
+  console.error('Required config option `apiUrl` is missing'); // eslint-disable-line no-console
+}
+
 store.dispatch(setMultiselect(options.multiselect));
 store.dispatch(setApiUrl(options.apiUrl));
 
