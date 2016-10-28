@@ -59,11 +59,10 @@ export function receiveAlbums(json) {
 }
 
 export const REQUEST_PHOTOS = 'REQUEST_PHOTOS';
-export function requestPhotos(album, tags) {
+export function requestPhotos(album) {
   return {
     type: REQUEST_PHOTOS,
     album,
-    tags,
   };
 }
 
