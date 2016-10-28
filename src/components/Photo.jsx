@@ -10,21 +10,24 @@ $.fn.transition = require('semantic-ui-transition');
 const SelectPhotoButton = ({
   photo,
   isSelected,
-  isAllowed,
+  isSelectable,
   isMultiselect,
   selectPhoto,
   confirmSelection,
+  doctype,
 }) => {
-  if (!isAllowed) {
+  if (!isSelectable) {
     return (
-      <div className="ui bottom attached button">
-        <i className="add icon"></i> Velg bilde
+      <div data-tooltip={`Kan ikke velge denne typen (${doctype.friendlyName})`} data-inverted="">
+        <div className="ui bottom attached button disabled">
+          <i className="add icon"></i> Velg {doctype.friendlyName}
+        </div>
       </div>
     );
   } else if (!isMultiselect) {
     return (
       <div className="ui bottom attached button" onClick={() => { confirmSelection(photo); }}>
-        <i className="check icon"></i> Velg bilde
+        <i className="check icon"></i> Velg {doctype.friendlyName}
       </div>
     );
   } else if (isSelected) {
@@ -37,7 +40,7 @@ const SelectPhotoButton = ({
 
   return (
     <div className="ui bottom attached button" onClick={() => { selectPhoto(photo); }}>
-      <i className="add icon"></i> Velg bilde
+      <i className="add icon"></i> Velg {doctype.friendlyName}
     </div>
   );
 };
@@ -73,12 +76,13 @@ class Photo extends Component {
       selectPhoto,
       photo,
       isSelected,
-      allowedDoctypes,
+      doctypes,
       isMultiselect,
       confirmSelection,
     } = this.props;
 
-    const isAllowed = allowedDoctypes.indexOf(photo.doctype) > -1;
+    const doctype = doctypes[photo.doctype];
+    const isSelectable = !!doctype.selectable;
 
     return (
       <div className={`ui ${isSelected ? 'raised ' : ''}card photo`}>
@@ -144,10 +148,11 @@ class Photo extends Component {
         <SelectPhotoButton
           photo={photo}
           isSelected={isSelected}
-          isAllowed={isAllowed}
+          isSelectable={isSelectable}
           selectPhoto={selectPhoto}
           isMultiselect={isMultiselect}
           confirmSelection={confirmSelection}
+          doctype={doctype}
         />
       </div>
     );

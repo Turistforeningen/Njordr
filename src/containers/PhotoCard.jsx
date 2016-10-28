@@ -5,7 +5,7 @@ import Photo from '../components/Photo.jsx';
 import {confirmSelection, togglePhotoSelection} from '../actions/index.js';
 
 const mapStateToProps = (state) => ({
-  allowedDoctypes: state.app.allowedDoctypes,
+  doctypes: state.app.doctypes,
   isMultiselect: state.app.isMultiselect,
 });
 

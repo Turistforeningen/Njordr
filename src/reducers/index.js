@@ -23,8 +23,11 @@ import {
 function appReducer(state = {
   isMultiselect: false,
   selectedPhotos: [],
-  allowedDoctypes: ['image'], // NOTE: Add support for `doctype: 'movie'`
   promotedArchives: [],
+  doctypes: {
+    image: {friendlyName: 'bilde', selectable: true},
+    movie: {friendlyName: 'video', selectable: false},
+  },
 }, action) {
   switch (action.type) {
     case SET_API_URL:
