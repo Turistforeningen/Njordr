@@ -215,7 +215,7 @@ export function fetchTags() {
   return (dispatch, getState) => {
     const {app} = getState();
 
-    dispatch(requestAlbums());
+    dispatch(requestTags());
 
     return fetch(`${app.apiUrl}/tags`)
       .then(response => response.json())
