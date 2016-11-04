@@ -202,8 +202,7 @@ export function togglePhotoSelection(photo) {
 export function confirmSelection(selection) {
   return function (dispatch, getState) { // eslint-disable-line func-names
     try {
-      const event = new CustomEvent('fotoweb.selected', {detail: selection});
-      window.opener.dispatchEvent(event);
+      window.opener.fotoweb.confirmSelected(selection);
     } catch (err) {
       console.error('Browser was not opened in popup — tried to confirm', selection); // eslint-disable-line no-console, max-len
     }
