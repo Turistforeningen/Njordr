@@ -80,7 +80,7 @@ class Photo extends Component {
       confirmSelection,
     } = this.props;
 
-    const doctype = doctypes[photo.doctype];
+    const doctype = doctypes[photo.doctype] || doctypes.unknown;
     const isSelectable = !!doctype.selectable;
 
     return (

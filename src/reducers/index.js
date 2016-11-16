@@ -27,6 +27,8 @@ function appReducer(state = {
   doctypes: {
     image: {friendlyName: 'bilde', selectable: true},
     movie: {friendlyName: 'video', selectable: false},
+    document: {friendlyName: 'dokument', selectable: false},
+    unknown: {friendlyName: 'ukjent', selectable: false},
   },
 }, action) {
   switch (action.type) {
