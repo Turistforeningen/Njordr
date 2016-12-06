@@ -2,7 +2,7 @@ version: '2'
 
 services:
   node:
-    image: node:6-slim
+    image: kkarczmarczyk/node-yarn:latest
     networks:
       - dockerproxy_default
     working_dir: /usr/src/app
