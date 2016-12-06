@@ -3,7 +3,8 @@ version: '2'
 services:
   node:
     image: node:6-slim
-    network_mode: bridge
+    networks:
+      - dockerproxy_default
     working_dir: /usr/src/app
     ports:
       - "8080"
@@ -20,3 +21,7 @@ services:
       options:
         max-size: "500k"
     command: node ./server.js
+
+networks:
+  dockerproxy_default:
+    external: true
