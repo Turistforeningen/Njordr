@@ -3,13 +3,13 @@ Njörðr is a GUI for browsing [Skaði](https://github.com/Turistforeningen/Skad
 
 ## Load plugin
 Include the plugin in a `script` tag.
-```
+```html
 <script src="/path/to/fotoweb/plugin.js"></script>
 ```
 ## Methods
 The plugin will be available as a global `fotoweb` object.jk
 ### open
-```
+```javascript
 fotoweb.open(options, callback);
 ```
 #### options
@@ -19,7 +19,7 @@ fotoweb.open(options, callback);
 * **string[]** `promotedArchives` – Names of archives that are more important to the user. The first one will be opened by default. All of them will be in the top of the list of archives in the nav bar.
 
 #### callback
-```
+```javascript
 function callback(selected) {
   console.log('Look what I got!', selected);
 }
