@@ -14,7 +14,7 @@ services:
       - NPM_CONFIG_LOGLEVEL=warn
       - NPM_CONFIG_PROGRESS=false
       - NPM_CONFIG_SPIN=false
-      - VIRTUAL_HOST=njordr.app.dnt.privat
+      - VIRTUAL_HOST=njordr.app.dnt.local
       - VIRTUAL_PORT=8080
     logging:
       options:
