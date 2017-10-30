@@ -9,7 +9,12 @@ class Photos extends Component {
   loadMore() {
     const {album, fetchPhotos} = this.props;
 
-    fetchPhotos(album.id);
+    // NOTE: The conditional should not be necessary, as hasMore is also passed to InfiniteScroll
+    // and it does not make sense to call this function if hasMore is false.
+    // https://github.com/RealScout/redux-infinite-scroll/pull/39
+    if (album.pagination.hasMore) {
+      fetchPhotos(album.id);
+    }
   }
 
   renderPhotos() {
