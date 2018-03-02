@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 
 import {
+  SET_ERROR,
   SET_API_URL,
   SET_MULTISELECT,
   TOGGLE_PHOTO_IN_SELECTION,
@@ -32,6 +33,8 @@ function appReducer(state = {
   },
 }, action) {
   switch (action.type) {
+    case SET_ERROR:
+      return Object.assign({}, state, {error: action.error});
     case SET_API_URL:
       return Object.assign({}, state, {apiUrl: action.url});
     case SET_CURRENT_ARCHIVE:

@@ -9,8 +9,16 @@ export const SET_ERROR = 'SET_ERROR';
 export function setError(err) {
   return {
     type: 'SET_ERROR',
-    err,
+    error: err,
   };
+}
+
+export function handleError(err) {
+  window.opener.fotoweb.errorHandler(err);
+
+  return (dispatch, getState) => (
+    dispatch(setError('Det skjedde en feil ved henting av arkiver.'))
+  );
 }
 
 export const SET_API_URL = 'SET_API_URL';
@@ -116,10 +124,8 @@ export function fetchAlbums() {
 
     return fetch(`${app.apiUrl}/albums`)
       .then(response => response.json())
-      .then(
-        json => dispatch(receiveAlbums(json)),
-        err => dispatch(setError(err))
-      );
+      .then(json => dispatch(receiveAlbums(json)))
+      .catch(err => dispatch(handleError(err)));
   };
 }
 

@@ -22,6 +22,9 @@
           },
           function callback(selected) {
             console.log('Look what I got!', selected);
+          },
+          function errorHandler(err) {
+            console.error('OMG, an err!', err);
           }
         );
       }
