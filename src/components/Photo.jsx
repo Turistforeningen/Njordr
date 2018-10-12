@@ -109,7 +109,11 @@ class Photo extends Component {
                 <div className="item">
                   <i className="camera icon"></i>
                   <div className="content">
-                    {photo.metadata.photographers.join(', ')}
+                    {
+                      photo.metadata.photographers && photo.metadata.photographers.length
+                      ? photo.metadata.photographers.join(', ')
+                      : ''
+                    }
                   </div>
                 </div>
                 <div className="item">
@@ -121,7 +125,11 @@ class Photo extends Component {
                 <div className="item">
                   <i className="tag icon"></i>
                   <div className="content">
-                    {photo.metadata.tags.join(', ')}
+                    {
+                      photo.metadata.tags && photo.metadata.tags.length
+                      ? photo.metadata.tags.join(', ')
+                      : ''
+                    }
                   </div>
                 </div>
                 <div className="item">
