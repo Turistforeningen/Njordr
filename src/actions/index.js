@@ -77,7 +77,21 @@ export function requestPhotos(album) {
 export const RECEIVE_PHOTOS = 'RECEIVE_PHOTOS';
 export function receivePhotos(album, json, append) {
   const hasMore = (!!json.paging && !!json.paging.next);
-  const photos = json.data.map(photo => photo);
+  const photos = json.data.map(photo => {
+    if (!photo.metadata || !photo.metadata.albums) {
+      photo.metadata.albums = [];
+    }
+
+    if (!photo.metadata || !photo.metadata.photographers) {
+      photo.metadata.photographers = [];
+    }
+
+    if (!photo.metadata || !photo.metadata.tags) {
+      photo.metadata.tags = [];
+    }
+
+    return photo;
+  });
   const isEmpty = !hasMore && !photos.length;
 
   return {
