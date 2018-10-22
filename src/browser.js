@@ -74,8 +74,7 @@ store.dispatch(fetchAlbums())
   .then((state) => {
     if (options.promotedArchives && options.promotedArchives.length) {
       const defaultAlbum = Object.values(state.albums).find((album) => (
-        album.name === options.promotedArchives[0])
-      );
+        album.name === options.promotedArchives[0]));
 
       store.dispatch(setCurrentArchive(defaultAlbum.id));
     }

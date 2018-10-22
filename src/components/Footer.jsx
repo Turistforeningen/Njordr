@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import $ from 'jquery';
-$.fn.popup = require('semantic-ui-popup');
-$.fn.transition = require('semantic-ui-transition');
 
 import {confirmSelection, togglePhotoSelection} from '../actions/index.js';
 import {photoThumbnailSelector} from '../selectors/index.js';
+
+$.fn.popup = require('semantic-ui-popup');
+$.fn.transition = require('semantic-ui-transition');
 
 // TODO: Create and use thumbnailSelector to select preview
 class SelectedPhoto extends Component {
@@ -51,7 +51,7 @@ const SelectedPhotos = ({selectedPhotos, removePhoto}) => {
   return (
     <div>
       <div className="ui images">
-        {selectedPhotos.map(photo => (
+        {selectedPhotos.map((photo) => (
           <SelectedPhoto key={photo.id} photo={photo} removePhoto={removePhoto} />
         ))}
       </div>

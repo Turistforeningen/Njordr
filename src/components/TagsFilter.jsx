@@ -4,7 +4,7 @@ const TagsFilter = ({album, tags, toggleTag}) => (
   <div className="item">
     Tagger
     <div className="menu">
-      {tags.map(tag => (
+      {tags.map((tag) => (
         <a className="item" key={tag.key} onClick={() => {
           toggleTag(tag.val, album);
         }}>

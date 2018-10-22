@@ -98,12 +98,12 @@ export function receivePhotos(album, json, append) {
 
   return {
     type: RECEIVE_PHOTOS,
-    album,
-    photos,
+    album: album,
+    photos: photos,
     pagination: {...json.paging, hasMore},
     receivedAt: Date.now(),
-    isEmpty,
-    append,
+    isEmpty: isEmpty,
+    append: append,
   };
 }
 
@@ -111,8 +111,8 @@ export const SEARCH_ALBUM = 'SEARCH_ALBUM';
 export function searchAlbum(album, term) {
   return {
     type: SEARCH_ALBUM,
-    album,
-    term,
+    album: album,
+    term: term,
   };
 }
 
@@ -120,7 +120,7 @@ export const CLEAR_SEARCH = 'CLEAR_SEARCH';
 export function clearSearch(album) {
   return {
     type: CLEAR_SEARCH,
-    album,
+    album: album,
   };
 }
 
@@ -128,7 +128,7 @@ export const CLEAR_PHOTOS = 'CLEAR_PHOTOS';
 export function clearPhotos(album) {
   return {
     type: CLEAR_PHOTOS,
-    album,
+    album: album,
   };
 }
 
@@ -139,9 +139,9 @@ export function fetchAlbums() {
     dispatch(requestAlbums());
 
     return fetch(`${app.apiUrl}/albums`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveAlbums(json)))
-      .catch(err => dispatch(handleError(err)));
+      .then((response) => response.json())
+      .then((json) => dispatch(receiveAlbums(json)))
+      .catch((err) => dispatch(handleError(err)));
   };
 }
 
@@ -168,8 +168,8 @@ export function fetchPhotos(archiveId, append = true) {
     dispatch(requestPhotos(archive.id));
 
     return fetch(url.replace('http:', 'https:')) // TODO: Skadi returns http links only
-      .then(response => response.json())
-      .then(json => {
+      .then((response) => response.json())
+      .then((json) => {
         dispatch(receivePhotos(archive, json, append));
       });
   };
@@ -193,7 +193,7 @@ export const TOGGLE_TAG = 'TOGGLE_TAG';
 export function toggleTag(tag) {
   return {
     type: TOGGLE_TAG,
-    tag,
+    tag: tag,
   };
 }
 
@@ -201,7 +201,7 @@ export const TOGGLE_PHOTO = 'TOGGLE_PHOTO';
 export function togglePhoto(photo) {
   return {
     type: TOGGLE_PHOTO,
-    photo,
+    photo: photo,
     albumId: photo.albumId,
   };
 }
@@ -210,7 +210,7 @@ export const TOGGLE_PHOTO_IN_SELECTION = 'TOGGLE_PHOTO_IN_SELECTION';
 export function togglePhotoInSelection(photo, album) {
   return {
     type: TOGGLE_PHOTO_IN_SELECTION,
-    photo,
+    photo: photo,
   };
 }
 
@@ -238,7 +238,7 @@ export function fetchTags() {
     dispatch(requestTags());
 
     return fetch(`${app.apiUrl}/tags`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveTags(json)));
+      .then((response) => response.json())
+      .then((json) => dispatch(receiveTags(json)));
   };
 }

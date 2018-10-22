@@ -20,12 +20,8 @@ module.exports = {
         test: /\.jsx?$/,
         use: [
           {loader: 'babel-loader'},
-          // {loader: 'eslint-loader'},
+          {loader: 'eslint-loader'},
         ],
-      },
-      {
-        test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.css$/,
@@ -43,6 +39,10 @@ module.exports = {
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
         use: ['file-loader'],
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },

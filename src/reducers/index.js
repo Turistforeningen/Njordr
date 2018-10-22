@@ -45,7 +45,7 @@ function appReducer(state = {
       return Object.assign({}, state, {isMultiselect: action.isMultiselect});
     case TOGGLE_PHOTO_IN_SELECTION: // eslint-disable-line no-case-declarations
       const photoIndex = state.selectedPhotos.findIndex(
-        element => element.id === action.photo.id
+        (element) => element.id === action.photo.id
       );
       let selectedPhotos;
 
@@ -194,9 +194,9 @@ function tagsReducer(state = [], action) {
     case REQUEST_TAGS:
       return state;
     case RECEIVE_TAGS:
-      return action.tags.map(tag => Object.assign({}, tag, {isApplied: false}));
+      return action.tags.map((tag) => Object.assign({}, tag, {isApplied: false}));
     case TOGGLE_TAG:
-      return state.map(tag => Object.assign(
+      return state.map((tag) => Object.assign(
         {},
         tag,
         {isApplied: action.tag === tag.val ? !tag.isApplied : tag.isApplied}
