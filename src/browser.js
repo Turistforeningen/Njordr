@@ -7,7 +7,6 @@ import store from './store.js';
 
 import {
   fetchAlbums,
-  fetchPhotos,
   fetchTags,
   setApiUrl,
   setCurrentArchive,
@@ -15,8 +14,6 @@ import {
   setMultiselect,
   setPromotedArchives,
 } from './actions/index.js';
-
-import {selectedAlbumSelector} from './selectors/index.js';
 
 import App from './components/App.jsx';
 
@@ -46,7 +43,7 @@ store.dispatch(fetchAlbums())
         options.hiddenArchives.find((name) => (
           new RegExp(archive.name, 'i').test(name)
         ))
-      )).map(archive => archive.id);
+      )).map((archive) => archive.id);
 
       store.dispatch(removeArchives(hiddenArchives));
     }
@@ -76,7 +73,7 @@ store.dispatch(fetchAlbums())
   })
   .then((state) => {
     if (options.promotedArchives && options.promotedArchives.length) {
-      const defaultAlbum = Object.values(state.albums).find(album => (
+      const defaultAlbum = Object.values(state.albums).find((album) => (
         album.name === options.promotedArchives[0])
       );
 

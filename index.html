@@ -7,7 +7,7 @@
     <input type="checkbox" id="multiselect"> Multiselect
     <br>
     <button id="fotoweb">Browse FotoWeb</button>
-    <script src="/static/plugin.js"></script>
+    <script src="/assets/plugin.js"></script>
     <script>
       var fotowebCheckbox = document.getElementById('multiselect');
       var fotowebButton = document.getElementById('fotoweb');
@@ -23,8 +23,8 @@
           function callback(selected) {
             console.log('Look what I got!', selected);
           },
-          function errorHandler(err) {
-            console.error('OMG, an err!', err);
+          function errorHandler(err, info) {
+            console.error('OMG, an err!', err, info);
           }
         );
       }

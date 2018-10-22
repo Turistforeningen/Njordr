@@ -1,18 +1,41 @@
 {
+  "env": {
+    "browser": true
+  },
   "extends": "airbnb-base",
-  "plugins": ["react"],
+  "plugins": ["import", "react"],
+  "parser": "babel-eslint",
   "parserOptions": {
-    "ecmaVersion": 6,
     "sourceType": "module",
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
-      "jsx": true
+      "jsx": true,
+      "modules": true
     }
   },
   "rules": {
-    "strict": [2, "global"],
+    "arrow-parens": [2, "always"],
+    "class-methods-use-this": [
+      "error", {"exceptMethods": ["render"]}
+    ],
+    "comma-dangle": [
+      "error", {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
+    "function-paren-newline": ["error", "consistent"],
+    "import/extensions": "off",
     "no-param-reassign": [2, {"props": false}],
-    "object-curly-spacing": [0],
-    "no-unused-vars": [0]
+    "no-underscore-dangle": [2, {"allow": ["_id"]}],
+    "no-unused-vars": [2, {"args": "none"}],
+    "object-curly-newline": ["error", {"consistent": true}],
+    "object-curly-spacing": [2, "never"],
+    "object-shorthand": [2, "consistent"],
+    "react/jsx-uses-react": ["error"],
+    "react/jsx-uses-vars": ["error"]
   }
 }

@@ -1,35 +1,42 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 
 import AlbumContainer from '../containers/AlbumContainer.jsx';
 import ArchivesContainer from '../containers/ArchivesContainer.jsx';
 import Header from '../components/Header.jsx';
-import Footer from '../components/Footer.jsx';
+import FooterContainer from '../components/Footer.jsx';
 import Message from '../components/Message.jsx';
+
+import {handleError} from '../actions/index.js';
 
 require('semantic-ui-css/semantic.css');
 require('../sass/app.scss');
 
-export const App = ({
-  currentArchive,
-  isMultiselect,
-  error,
-}) => (
-  <div>
-    <Header />
-    <div className="ui grid">
-      <div className="ui sixteen wide column">
-        {error
-          ? <Message type="error">{error}</Message>
-          : null
-        }
-        {currentArchive ? <AlbumContainer /> : <ArchivesContainer />}
+class App extends Component {
+  componentDidCatch(err, info) {
+    this.props.handleError(err, info);
+  }
+
+  render() {
+    const {currentArchive, isMultiselect, error} = this.props;
+
+    return (
+      <div>
+        <Header />
+        <div className="ui grid">
+          <div className="ui sixteen wide column">
+            {error
+              ? <Message type="error">{error}</Message>
+              : null
+            }
+            {currentArchive ? <AlbumContainer /> : <ArchivesContainer />}
+          </div>
+        </div>
+        {isMultiselect ? <FooterContainer /> : ''}
       </div>
-    </div>
-    {isMultiselect ? <Footer /> : ''}
-  </div>
-);
+    );
+  }
+}
 
 const mapStateToProps = (state) => ({
   currentArchive: state.app.currentArchive,
@@ -37,6 +44,12 @@ const mapStateToProps = (state) => ({
   error: state.app.error,
 });
 
-const AppConnected = connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  handleError: (err, info) => {
+    dispatch(handleError(err, info));
+  },
+});
+
+const AppConnected = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default AppConnected;

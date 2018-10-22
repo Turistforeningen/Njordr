@@ -8,7 +8,7 @@ const TagsFilter = ({album, tags, toggleTag}) => (
         <a className="item" key={tag.key} onClick={() => {
           toggleTag(tag.val, album);
         }}>
-          <input type="checkbox" checked={tag.isApplied ? 'checked' : ''} />
+          <input readOnly type="checkbox" checked={tag.isApplied ? 'checked' : ''} />
           {' '}
           {tag.val}
         </a>

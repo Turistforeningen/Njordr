@@ -1,5 +1,6 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import $ from 'jquery';
 
@@ -78,91 +79,114 @@ class Photo extends Component {
       doctypes,
       isMultiselect,
       confirmSelection,
+      handleError,
     } = this.props;
 
     const doctype = doctypes[photo.doctype] || doctypes.unknown;
     const isSelectable = !!doctype.selectable;
 
-    return (
-      <div className={`ui ${isSelected ? 'raised ' : ''}card photo`}>
-        <div className="ui image">
-          {copyright ? <a className="ui right red ribbon label" ref="copyright">
-            <i className="warning icon"></i> Bruksbegrensing
-          </a> : ''}
-
-          {copyright ? <div className="ui inverted popup top center">
-            <div className="content">
-              {copyright}
-            </div>
-          </div> : ''}
-
-          <img src={src} />
-        </div>
-        <div className="extra content">
-          <a className="left floated info" ref="meta">
-            <i className="info icon"></i> Info
-          </a>
-          <div className="ui popup top center" style={{width: '250px'}}>
-            <div className="header">{id.length > 30 ? `${id.substring(0, 27)}...` : id}</div>
-            <div className="content">
-              <div className="ui list">
-                <div className="item">
-                  <i className="camera icon"></i>
-                  <div className="content">
-                    {
-                      photo.metadata.photographers && photo.metadata.photographers.length
-                      ? photo.metadata.photographers.join(', ')
-                      : ''
-                    }
-                  </div>
-                </div>
-                <div className="item">
-                  <i className="calendar icon"></i>
-                  <div className="content">
-                    {moment(photo.modified).format('DD.MM.YY')}
-                  </div>
-                </div>
-                <div className="item">
-                  <i className="tag icon"></i>
-                  <div className="content">
-                    {
-                      photo.metadata.tags && photo.metadata.tags.length
-                      ? photo.metadata.tags.join(', ')
-                      : ''
-                    }
-                  </div>
-                </div>
-                <div className="item">
-                  <i className="copyright icon"></i>
-                  <div className="content">
-                    {copyright || 'Kan brukes fritt'}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="right floated">
-            <a className="description" ref="description">
-              <i className="align left icon"></i> Tekst
-            </a>
-            <div className="ui inverted popup top center">
+    try {
+      return (
+        <div className={`ui ${isSelected ? 'raised ' : ''}card photo`}>
+          <div className="ui image">
+            {copyright ? <a className="ui right red ribbon label" ref="copyright">
+              <i className="warning icon"></i> Bruksbegrensing
+            </a> : ''}
+            {copyright ? <div className="ui inverted popup top center">
               <div className="content">
-                {description || 'Ingen bildetekst'}
+                {copyright}
+              </div>
+            </div> : ''}
+
+            <img src={src} />
+          </div>
+          <div className="extra content">
+            <a className="left floated info" ref="meta">
+              <i className="info icon"></i> Info
+            </a>
+            <div className="ui popup top center" style={{width: '250px'}}>
+              <div className="header">{id.length > 30 ? `${id.substring(0, 27)}...` : id}</div>
+              <div className="content">
+                <div className="ui list">
+                  <div className="item">
+                    <i className="camera icon"></i>
+                    <div className="content">
+                      {
+                        photo.metadata.photographers && photo.metadata.photographers.length
+                        ? photo.metadata.photographers.join(', ')
+                        : ''
+                      }
+                    </div>
+                  </div>
+                  <div className="item">
+                    <i className="calendar icon"></i>
+                    <div className="content">
+                      {moment(photo.modified).format('DD.MM.YY')}
+                    </div>
+                  </div>
+                  <div className="item">
+                    <i className="tag icon"></i>
+                    <div className="content">
+                      {
+                        photo.metadata.tags && photo.metadata.tags.length
+                        ? photo.metadata.tags.join(', ')
+                        : ''
+                      }
+                    </div>
+                  </div>
+                  <div className="item">
+                    <i className="copyright icon"></i>
+                    <div className="content">
+                      {copyright || 'Kan brukes fritt'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="right floated">
+              <a className="description" ref="description">
+                <i className="align left icon"></i> Tekst
+              </a>
+              <div className="ui inverted popup top center">
+                <div className="content">
+                  {description || 'Ingen bildetekst'}
+                </div>
               </div>
             </div>
           </div>
+          <SelectPhotoButton
+            photo={photo}
+            isSelected={isSelected}
+            isSelectable={isSelectable}
+            selectPhoto={selectPhoto}
+            isMultiselect={isMultiselect}
+            confirmSelection={confirmSelection}
+            doctype={doctype}
+          />
         </div>
-        <SelectPhotoButton
-          photo={photo}
-          isSelected={isSelected}
-          isSelectable={isSelectable}
-          selectPhoto={selectPhoto}
-          isMultiselect={isMultiselect}
-          confirmSelection={confirmSelection}
-          doctype={doctype}
-        />
-      </div>
-    );
+      );
+    } catch (err) {
+      handleError(err);
+
+      return (
+        <div className="ui card photo">
+          <div class="aligned content">
+            <div class="center aligned header">Feil</div>
+            <div class="center aligned description">
+              <p>
+                Bildet kan ikke vises på grunn av en feil,{' '}
+                som er automatisk rapportert.
+              </p>
+            </div>
+          </div>
+          <div class="extra content">
+            <div class="center aligned">
+              {id}
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
 }
 

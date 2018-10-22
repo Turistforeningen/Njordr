@@ -3,43 +3,62 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  eslint: {configFile: '.eslintrc'},
+  // eslint: {configFile: '.eslintrc'},
   devtool: 'source-map',
   entry: {
-    plugin: './src/plugin',
-    browser: './src/browser',
+    plugin: ['./src/plugin'],
+    browser: ['./src/browser'],
   },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
   },
   module: {
-    loaders: [
+    rules: [
       {
+        include: path.join(__dirname, 'src'),
         test: /\.jsx?$/,
-        loaders: ['babel', 'eslint'],
-        include: path.join(__dirname, 'src')
+        use: [
+          {loader: 'babel-loader'},
+          // {loader: 'eslint-loader'},
+        ],
       },
-      {test: /\.css$/, loader: 'style-loader!css-loader?-autoprefixer'},
-      {test: /\.png$/, loader: 'url-loader?limit=100000'},
-      {test: /\.jpg$/, loader: 'file-loader'},
-      {test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/, loader: 'file-loader'},
-      {test: /\.scss$/, loaders: ['style', 'css', 'sass']}
-    ]
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {loader: 'style-loader'},
+          {loader: 'css-loader', options: {autoprefixer: true}},
+        ],
+      },
+      {
+        test: /\.png$/,
+        use: [
+          {loader: 'url-loader', options: {limit: 100000}},
+        ],
+      },
+      {
+        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+        use: ['file-loader'],
+      },
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env':{
-        'NODE_ENV': JSON.stringify('production')
-      }
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
     }),
     new HtmlWebpackPlugin({
       filename: 'browser.html',
       template: './src/browser.html',
       chunks: ['browser'],
     }),
-    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb|nn/),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en|nb|nn/),
+    // new webpack.optimize.UglifyJsPlugin(),
   ],
 };
+

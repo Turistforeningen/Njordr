@@ -14,10 +14,12 @@ export function setError(err) {
 }
 
 export function handleError(err) {
-  window.opener.fotoweb.errorHandler(err);
+  if (typeof window.opener.fotoweb.errorHandler === 'function') {
+    window.opener.fotoweb.errorHandler(err);
+  }
 
   return (dispatch, getState) => (
-    dispatch(setError('Det skjedde en feil ved henting av arkiver.'))
+    dispatch(setError('Det skjedde en feil ved henting av arkiver eller bilder.'))
   );
 }
 
@@ -25,7 +27,7 @@ export const SET_API_URL = 'SET_API_URL';
 export function setApiUrl(url) {
   return {
     type: SET_API_URL,
-    url,
+    url: url,
   };
 }
 
@@ -33,23 +35,23 @@ export const SET_MULTISELECT = 'SET_MULTISELECT';
 export function setMultiselect(isMultiselect) {
   return {
     type: SET_MULTISELECT,
-    isMultiselect,
+    isMultiselect: isMultiselect,
   };
 }
 
 export const SET_CURRENT_ARCHIVE = 'SET_CURRENT_ARCHIVE';
 export function setCurrentArchive(archive) {
-  return {type: SET_CURRENT_ARCHIVE, archive};
+  return {type: SET_CURRENT_ARCHIVE, archive: archive};
 }
 
 export const REMOVE_ARCHIVES = 'REMOVE_ARCHIVES';
 export function removeArchives(archives) {
-  return {type: REMOVE_ARCHIVES, archives};
+  return {type: REMOVE_ARCHIVES, archives: archives};
 }
 
 export const SET_PROMOTED_ARCHIVES = 'SET_PROMOTED_ARCHIVES';
 export function setPromotedArchives(archives) {
-  return {type: SET_PROMOTED_ARCHIVES, archives};
+  return {type: SET_PROMOTED_ARCHIVES, archives: archives};
 }
 
 export const REQUEST_ALBUMS = 'REQUEST_ALBUMS';
@@ -61,7 +63,7 @@ export const RECEIVE_ALBUMS = 'RECEIVE_ALBUMS';
 export function receiveAlbums(json) {
   return {
     type: RECEIVE_ALBUMS,
-    albums: json.data.map(album => Object.assign({}, album, {pagination: {hasMore: true}})),
+    albums: json.data.map((album) => Object.assign({}, album, {pagination: {hasMore: true}})),
     receivedAt: Date.now(),
   };
 }
@@ -70,14 +72,14 @@ export const REQUEST_PHOTOS = 'REQUEST_PHOTOS';
 export function requestPhotos(album) {
   return {
     type: REQUEST_PHOTOS,
-    album,
+    album: album,
   };
 }
 
 export const RECEIVE_PHOTOS = 'RECEIVE_PHOTOS';
 export function receivePhotos(album, json, append) {
   const hasMore = (!!json.paging && !!json.paging.next);
-  const photos = json.data.map(photo => {
+  const photos = json.data.map((photo) => {
     if (!photo.metadata || !photo.metadata.albums) {
       photo.metadata.albums = [];
     }

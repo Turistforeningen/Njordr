@@ -1,5 +1,6 @@
-import React, {Component, PropTypes} from 'react';
-import InfiniteScroll from 'redux-infinite-scroll';
+import React, {Component} from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
+import PropTypes from 'prop-types';
 
 import PhotoCard from '../containers/PhotoCard.jsx';
 import SearchContainer from '../containers/SearchContainer.jsx';
@@ -20,7 +21,7 @@ class Photos extends Component {
   renderPhotos() {
     const {photos} = this.props;
 
-    return photos.map(photo => (
+    return photos.map((photo) => (
       <PhotoCard
         id={photo.id}
         src={photo.previews[10].href}
@@ -36,10 +37,10 @@ class Photos extends Component {
   render() {
     const {album, isFetching, photos} = this.props;
     const loader = photos.length === 0 ?
-      <div className="ui active centered loader"></div>
+      <div className="ui active centered loader" key="unique-loader"></div>
       :
       (
-        <div className="card">
+        <div className="card" key="unique-loader">
           <div className="ui active inverted dimmer">
             <div className="ui loader"></div>
           </div>
@@ -60,14 +61,13 @@ class Photos extends Component {
     return (
       <InfiniteScroll
         className="ui four cards"
-        elementIsScrollable={false}
-        items={this.renderPhotos()}
         loader={loader}
         loadMore={this.loadMore.bind(this)}
-        loadingMore={isFetching}
         threshold={500}
-        hasMore={album.pagination.hasMore}
-      />
+        hasMore={isFetching ? false : album.pagination.hasMore}
+      >
+        {this.renderPhotos()}
+      </InfiniteScroll>
     );
   }
 }

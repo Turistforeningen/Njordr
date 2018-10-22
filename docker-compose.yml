@@ -2,21 +2,21 @@ version: '2'
 
 services:
   node:
-    image: node:7.8.0
+    image: node:7.8.0-alpine
     network_mode: 'bridge'
     working_dir: /usr/src/app
     ports:
-      - "8080"
+      - "3000"
     volumes:
       - .:/usr/src/app
     environment:
       - NODE_ENV=development
-      - NPM_CONFIG_LOGLEVEL=warn
+      - NPM_CONFIG_LOGLEVEL=info
       - NPM_CONFIG_PROGRESS=false
       - NPM_CONFIG_SPIN=false
       - VIRTUAL_HOST=njordr.app.dnt.local
-      - VIRTUAL_PORT=8080
+      - VIRTUAL_PORT=3000
     logging:
       options:
         max-size: "500k"
-    command: node ./server.js
+    command: 'npm run client:start'

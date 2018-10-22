@@ -10,9 +10,9 @@ const FotoWeb = class FotoWeb {
 
   open(options, callback, errorHandler) {
     this.callback = callback;
-    this.errorHandler = errorHandler || function(err) {  //eslint-disable-line
+    this.errorHandler = errorHandler || function(err, info) {  //eslint-disable-line
       console.warn('No error handler defined for FotoWeb'); // eslint-disable-line
-      console.error('An error occured', err);
+      console.error('An error occured', err, info); // eslint-disable-line
     };
 
     this.popup = window.open(

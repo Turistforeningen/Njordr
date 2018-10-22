@@ -1,8 +1,7 @@
-import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Photo from '../components/Photo.jsx';
 
-import {confirmSelection, togglePhotoSelection} from '../actions/index.js';
+import {confirmSelection, handleError, togglePhotoSelection} from '../actions/index.js';
 
 const mapStateToProps = (state) => ({
   doctypes: state.app.doctypes,
@@ -15,6 +14,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   confirmSelection: (selection) => {
     dispatch(confirmSelection(selection));
+  },
+  handleError: (err, info) => {
+    dispatch(handleError(err, info));
   },
 });
 
