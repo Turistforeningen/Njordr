@@ -48,9 +48,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     new HtmlWebpackPlugin({
       filename: 'browser.html',
@@ -58,7 +56,6 @@ module.exports = {
       chunks: ['browser'],
     }),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en|nb|nn/),
-    // new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
   ],
 };
-
